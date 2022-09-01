@@ -1,4 +1,5 @@
 
+ 
 /*********************************************************************************
  * 
  * Author:      Jarette Greene
@@ -74,12 +75,25 @@ private:
         Front = Rear = CurrentSize = 0;         
         QueSize = size;
     }
+    /**
+     * Private: Full
+     * 
+     * Description: 
+     *      Checks to see if the array is full
+     * 
+     * Params: 
+     *      N/A
+     * 
+     * Returns:
+     *      Returns true of falso based on the status of the list 
+     */
 
     bool Full() {                               // checking to see if the array is filled 
         return CurrentSize == QueSize;
     }
 
 public:
+
     CircularArrayQue() {                        // constructor that sets the size of the array to 10
         Container = new int[10];
         init(10);
@@ -88,7 +102,21 @@ public:
         Container = new int[size];
         init(size);
     }
-
+/**
+ * Public: Push 
+ * 
+ * Description:
+ *      Adds an item to the back of the queue
+ * 
+ * Param
+ * 
+ *      int     : the data that will be added to the program
+ * 
+ * Returns: 
+ * 
+ *      N/A
+ * 
+ */
    void Push(int item) {                        // function to add to the queue
         if (!Full()) {
             Container[Rear] = item;
@@ -98,7 +126,18 @@ public:
             cout << "FULL!!!!" << endl;
         }
     }
-
+/**
+ * Public: Pop
+ * 
+ * Description:
+ *      Removes an item from the front of the queue
+ * 
+ * Param
+ *      N/A
+ * 
+ * Returns:
+ *      returns the piece of data that was popped off the list 
+ */
     int Pop() {                                 // function that removes from the queue 
         int temp = Container[Front];
         Front = (Front + 1) % QueSize;
