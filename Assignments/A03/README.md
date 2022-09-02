@@ -8,7 +8,7 @@ This program is used to show proper Readme and commenting guidlines
 
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
-|   1   | |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/A03/main.cpp) Main driver of my list program . |
+|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/A03/main.cpp)| Main driver of my list program . |
 
 ### Instructions
 
