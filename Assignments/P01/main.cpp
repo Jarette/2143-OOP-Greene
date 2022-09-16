@@ -26,11 +26,12 @@
 *			output.dat				:to display list
 *
 *****************************************************************************/
-#include <iostream>
+//Neccesary Libraries 
+#include <iostream>				
 #include <fstream>
 #include <string>
 
-using namespace std;
+using namespace std;				//allows for the use of standard library 
 /**
  * Node
  * 
@@ -53,10 +54,10 @@ using namespace std;
  *      
  */
 struct Node {
-	int data;
-	Node* next;
-	Node* Prev;
-	Node(int d) {
+	int data;				// the data that will be stored in the lisrt 
+	Node* next;				// node pointing to the new node
+	Node* Prev;				// node pointing to previous node 
+	Node(int d) {			// constructor to create a new node
 		data = d;
 		next = NULL;
 		Prev = NULL;
@@ -122,50 +123,49 @@ private:
 	Node* tail;
 /*
  
-                                            /$$                                     /$$                        
-                                           | $$                                    | $$                        
-   /$$$$$$$  /$$$$$$  /$$$$$$$   /$$$$$$$ /$$$$$$    /$$$$$$  /$$   /$$  /$$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$ 
-  /$$_____/ /$$__  $$| $$__  $$ /$$_____/|_  $$_/   /$$__  $$| $$  | $$ /$$_____/|_  $$_/   /$$__  $$ /$$__  $$
- | $$      | $$  \ $$| $$  \ $$|  $$$$$$   | $$    | $$  \__/| $$  | $$| $$        | $$    | $$  \ $$| $$  \__/
- | $$      | $$  | $$| $$  | $$ \____  $$  | $$ /$$| $$      | $$  | $$| $$        | $$ /$$| $$  | $$| $$      
- |  $$$$$$$|  $$$$$$/| $$  | $$ /$$$$$$$/  |  $$$$/| $$      |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
-  \_______/ \______/ |__/  |__/|_______/    \___/  |__/       \______/  \_______/   \___/   \______/ |__/      
-                                                                                                               
-                                                                                                               
-                                                                                                               
+         /$$$$$$                                  /$$                                     /$$                                  
+        /$$__  $$                                | $$                                    | $$                                  
+       | $$  \__/  /$$$$$$  /$$$$$$$   /$$$$$$$ /$$$$$$    /$$$$$$  /$$   /$$  /$$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$
+       | $$       /$$__  $$| $$__  $$ /$$_____/|_  $$_/   /$$__  $$| $$  | $$ /$$_____/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/
+       | $$      | $$  \ $$| $$  \ $$|  $$$$$$   | $$    | $$  \__/| $$  | $$| $$        | $$    | $$  \ $$| $$  \__/|  $$$$$$ 
+       | $$    $$| $$  | $$| $$  | $$ \____  $$  | $$ /$$| $$      | $$  | $$| $$        | $$ /$$| $$  | $$| $$       \____  $$
+       |  $$$$$$/|  $$$$$$/| $$  | $$ /$$$$$$$/  |  $$$$/| $$      |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$/| $$       /$$$$$$$/
+        \______/  \______/ |__/  |__/|_______/    \___/  |__/       \______/  \_______/   \___/   \______/ |__/      |_______/ 
+                                                                                                                               
+                                                                                                                               
+                                                                                                                               
  
 */
 public: 
-	Vector() {
-		head = NULL;
+	Vector() {					//default constructor 
+		head = NULL;			//setting head and tail to NULL
 		tail = NULL;
 	}
-	Vector(int* a, int size)
+	Vector(int* a, int size) 	//constructor to accept an array and its size to create a new vector
 	{
-		head = NULL;
-		tail = NULL;
-		Node* traverse = head;
-		for (int i = 0; i < size; i++) {
+		head = NULL;			
+		tail = NULL;	
+		for (int i = 0; i < size; i++) { 	// for loop to push the elements of the array to the rear of the list
 			Pushrear(a[i]);
 		}
 	}
-	Vector(string filename) {
+	Vector(string filename) {	// Constructor that accepts data from a file
 		head = NULL;
 		tail = NULL;
-		int data = 0;
+		int data = 0;			// variable to accept data from file
 		ifstream infile;
-		infile.open(filename);
+		infile.open(filename);	//opening file
 		
-		while (!infile.eof()) {
-			infile >> data;
-			Pushrear(data);
+		while (!infile.eof()) {	//while loop that repeats until the file is empty and pushes the data to end of list
+			infile >> data;		
+			Pushrear(data);		
 		}
 		infile.close();
 	}
-	Vector(const Vector &V) {
+	Vector(const Vector &V) {	//Constructor to create a vector using another vector 
 		head = tail = NULL;
 		Node* traverse = V.head;
-		while (traverse) {
+		while (traverse) {		//while loop that traverses the whole list and pushes the data from the V2 to V1
 			Pushrear(traverse->data);
 			traverse = traverse->next;
 		}
@@ -184,20 +184,20 @@ public:
      * Returns:
      *      Bool 			a true or false if the list is sorted
      */
-	bool isSorted() {
+	bool isSorted() {	
 		int count = 0;
 		
 		Node* traverse = head;
-		while (traverse->next != NULL) {
-			if (traverse->data >= traverse->next->data) {
-				count++;
+		while (traverse->next != NULL) { 	//while loop to traverse the list until the end 
+			if (traverse->data >= traverse->next->data) {	//Checks if current list element is greater than the one ahead of it 
+				count++;	// increments count if switch is made
 
 			}
 
 
 			traverse = traverse->next;
 		}
-		return count == 0;
+		return count == 0;	//returns true if the count is 0 because that means the if statment never ran 
 		
 	}
 	 /**
@@ -213,18 +213,18 @@ public:
      *      Vector 		returns a sorted list
      */
 	void Sort() {
-		bool notSorted = true;
+		bool notSorted = true;		//assumes the list is notsorted 
 		int i = 0;
-		while (notSorted) {
-			notSorted = false;
+		while (notSorted) {			//while loop that runs while the list is still "sorted"
+			notSorted = false;		//notSorted to false to leave loop
 			Node* traverse = head;
-			while (traverse->next != NULL) {
-				if (traverse->data > traverse->next->data)  {
-					int temp = traverse->data;
+			while (traverse->next != NULL) {	//while loop that runs while not at the end of the loop
+				if (traverse->data > traverse->next->data)  { //checks if the current element is greater than future element 
+					int temp = traverse->data;				// performs a basic swap
 					traverse->data = traverse->next->data;
 					traverse->next->data = temp;
 					temp = 0;
-					notSorted = true;
+					notSorted = true;	// then sets notsorted to true so the loops continue repeating until the if statement is neever entered
 					
 				}
 				traverse = traverse->next;
@@ -245,9 +245,9 @@ public:
      * Returns:
      *      N/A
      */
-	void Print() {
+	void Print() {	
 		Node* traverse = head;
-		while (traverse) {
+		while (traverse) {				// traversing list and displayng data as it traverses
 			cout << traverse->data << " ";
 			traverse = traverse->next;
 		}
@@ -267,11 +267,11 @@ public:
 	int size() {
 		int count = 0;
 		Node* traverse = head;
-		while (traverse != NULL) {
-			count++;
+		while (traverse != NULL) {			// traverse entire list
+			count++;						// increments count as it traverses
 			traverse = traverse->next;
 		}
-		return count;
+		return count;						//returns size of the list
 	}
 	 /**
      * Public : Pushfront
@@ -287,13 +287,13 @@ public:
      *      N/A
      */
 	void Pushfront(int d){
-		Node* temp = new Node(d);
-		if (head == NULL) {
+		Node* temp = new Node(d); 	// creating new node
+		if (head == NULL) {			// checking if the list is empty 
 			head = temp;
 			tail = temp;
 		}
 		else {
-			temp->next = head;
+			temp->next = head;		//adds node to the front of list and repoints pointers
 			head->Prev = temp;
 			head = temp;
 		}
@@ -310,10 +310,10 @@ public:
      * Returns:
      *      N/A
      */
-	void Pushfront(Vector V){
-		V.tail->next = head;
-		head->Prev = V.tail;
-		head = V.head;
+	void Pushfront(Vector V){ 	
+		V.tail->next = head;		// attaching the tail of the new vector to the head of the current vector 
+		head->Prev = V.tail;		// attaches the previous head to the point to the tail of the new vector 
+		head = V.head;				// approipriately reassigns the head pointers
 	}
 	 /**
      * Public : Pushrear
@@ -329,15 +329,15 @@ public:
      *      N/A
      */
 	void Pushrear(int d){
-		Node* temp = new Node(d);
-		if (head == NULL) {
+		Node* temp = new Node(d);	//creating new node
+		if (head == NULL) {			// checking if the list is empty 
 			
 			head = temp;
 			tail = temp;
 		}
-		else {
+		else {						
 
-			temp->Prev = tail;
+			temp->Prev = tail;		// attaches new node to the back of list and move approipriate pointers 
 			tail->next = temp;
 			tail = temp;
 		}
@@ -355,9 +355,9 @@ public:
      *      N/A
      */
 	void Pushrear(Vector V){
-		tail->next = V.head;
-		V.head->Prev = tail;
-		tail = V.tail;
+		tail->next = V.head;		//assigns tail of current vector to head of new pointer 
+		V.head->Prev = tail;		//assigns head of new vector to tail of the current pointer 
+		tail = V.tail;				// reassgns tail approipriately 
 	}
 	 /**
      * Public : Pushat
@@ -372,19 +372,19 @@ public:
      *      N/A
      */
 	void Pushat(int loc, int d){
-		Node* temp = new Node(d);
-		if (loc == 1) {
-			Pushfront(d);
+		Node* temp = new Node(d);	//create new node
+		if (loc == 1) {				//checks if the requested location is the first position and pushes node to the front 
+			Pushfront(d);			
 		}
-		else if (loc >= size()) {
+		else if (loc >= size()) {  //checks if the requested location is the back of the list and pushes to the rear
 			Pushrear(d);
 		}
-		else {
+		else {						// if the spot is in the middle 
 			Node* traverse = head;
-			for (int a = 0; a < loc - 1; a++) {
+			for (int a = 0; a < loc - 1; a++) {	 //traverses to get to the position 
 				traverse = traverse->next;
 			}
-			temp->next = traverse;
+			temp->next = traverse;				//adds node to the middle of the list 
 			temp->Prev = traverse->Prev;
 			traverse->Prev->next = temp;
 			traverse->Prev = temp;
@@ -403,27 +403,27 @@ public:
      *      N/A
      */
 	void Pushinorder(int d){
-		if (!isSorted()) {
+		if (!isSorted()) {		// checks if list is sorted if not sorts it 
 			Sort();
 		}
-		if (head == NULL) {
+		if (head == NULL) {		//checks if list is empty 
 			cout << "list is empty";
 		}
-		else {
+		else {					
 			Node* traverse = head;
-			if (d < head->data) {
+			if (d < head->data) {		// checks if node data is less than head then pushes to the front 
 				Pushfront(d);
 			}
 			else if (d > tail->data) {
-				Pushrear(d);
+				Pushrear(d);			//checks if node data is greater than the tail then rear pushes 
 			}
 			else {
 				int count = 0;
-				while (traverse->data <= d && traverse != NULL) {
+				while (traverse->data <= d && traverse != NULL) {	//finds where the approipriate position of the node data should be 
 					count++;
 					traverse = traverse->next;
 				}
-				Pushat(count, d);
+				Pushat(count, d); 		// pushes data at approipriate spot
 			}
 
 		}
@@ -440,18 +440,18 @@ public:
      * Returns:
      *      int  	The item that was popped off the list 
      */
-	int PopFront(){
-		int num = head->data;
+	int PopFront(){			
+		int num = head->data;   		// gets data from node 
 		Node* temp = head;
-		if (head == NULL) {
+		if (head == NULL) {				//checks if list is empty
 			cout << "list is empty";
 			return -1;
 		}
-		else {
-			head = head->next;
-			delete temp;
-			head->Prev = NULL;
-			return num;
+		else {							
+			head = head->next;			//reassigns the head pointer 
+			delete temp;				//deletes old head
+			head->Prev = NULL;			//repoints head Prev to NULL
+			return num;					// returns the data that was stored in the node 
 		}
 	}
 	 /**
@@ -467,17 +467,17 @@ public:
      *      int 	 : the item that was popped off of the list
      */
 	int Poprear(){
-		int num = tail->data;
-		Node* temp = tail;
-		if (head == NULL) {
+		int num = tail->data;			//gets data from node to be removed 
+		Node* temp = tail;			
+		if (head == NULL) {				//checks if list is empty 
 			cout << "list is empty";
 			return -1;
 		}
 		else {
-			tail = tail->Prev;
-			delete temp;
-			tail->next = NULL;
-			return num;
+			tail = tail->Prev;			//reassigns new tail
+			delete temp;				//delete old node 
+			tail->next = NULL;			//reassigns tail next to null
+			return num;					//returns the data that was removed from list 
 		}
 	}
 	 /**
@@ -494,26 +494,26 @@ public:
      */
 	int Popat(int loc){
 		int num;
-		if (head == NULL) {
+		if (head == NULL) {				//checks if list is empty 
 			cout << "list is empty";
 			return -1;
 		}
-		else if (loc == 1) {
+		else if (loc == 1) {			// checks if the location is at the front then pops from front 
 			return PopFront();
 		}
-		else if (loc >= size()) {
+		else if (loc >= size()) {		// checks if location is in the rear then pushes from the rear 
 			return Poprear();
 		}
 		else {
 			Node* traverse = head;
-			for (int a = 0; a < loc-1; a++) {
+			for (int a = 0; a < loc-1; a++) {	//goes to location of the node to be deleted 
 				traverse = traverse->next;
 			}
-			num = traverse->data;
-			traverse->Prev->next = traverse->next;
+			num = traverse->data;			// gets data from node 
+			traverse->Prev->next = traverse->next;	//removes and reassigns nodes
 			traverse->next->Prev = traverse->Prev;
-			delete traverse;
-			return num;
+			delete traverse;				// deletes removed node 
+			return num;						// returns data from node 
 		}
 	}
 	 /**
@@ -531,31 +531,31 @@ public:
 	int Find(int d){
 		Node* traverse = head;
 		int count = 0;
-		if (d == head->data) {
+		if (d == head->data) {			// checks if the data youre looking for is located to the front of list 
 
 			return 1;
 		}
-		else if (d == tail->data) {
+		else if (d == tail->data) { 	// checks if the data is at the back of the list 
 
 			return size();
 		}
 		else {
-			while (traverse != NULL && traverse->data != d) {
+			while (traverse != NULL && traverse->data != d) {  	// find the location of data in the list 
 				count++;
 				traverse = traverse->next;
 			}
-			if (traverse == NULL) {
+			if (traverse == NULL) {				// if the data is not in the list 
 				cout << "Not found";
 				return -1;
 			}
 			else {
 				
-				return count+1;
+				return count+1;					// returns te postion of the data 
 			}
 		}
 	}
 	
-	friend ofstream& operator<<(ofstream&, const Vector&);
+	friend ofstream& operator<<(ofstream&, const Vector&); // allows for class to use this function 
 
 	
 };
@@ -574,131 +574,141 @@ public:
      */
 ofstream& operator<<(ofstream& outfile, const Vector& V) {
 	Node* traverse = V.head;
-	while (traverse != NULL) {
+	while (traverse != NULL) {					//goes through entire list and dispalays as it traverses
 		outfile << traverse->data << " ";
 		traverse = traverse->next;
 	}
 	return outfile;
 }
-void PrintArray(int* a, int size) {
-	for (int i = 0; i < size; i++) {
-		cout << a[i] << " ";
-	}
-}
+/*
+ 
+  /$$      /$$           /$$                 /$$$$$$$            /$$                              
+ | $$$    /$$$          |__/                | $$__  $$          |__/                              
+ | $$$$  /$$$$  /$$$$$$  /$$ /$$$$$$$       | $$  \ $$  /$$$$$$  /$$ /$$    /$$ /$$$$$$   /$$$$$$ 
+ | $$ $$/$$ $$ |____  $$| $$| $$__  $$      | $$  | $$ /$$__  $$| $$|  $$  /$$//$$__  $$ /$$__  $$
+ | $$  $$$| $$  /$$$$$$$| $$| $$  \ $$      | $$  | $$| $$  \__/| $$ \  $$/$$/| $$$$$$$$| $$  \__/
+ | $$\  $ | $$ /$$__  $$| $$| $$  | $$      | $$  | $$| $$      | $$  \  $$$/ | $$_____/| $$      
+ | $$ \/  | $$|  $$$$$$$| $$| $$  | $$      | $$$$$$$/| $$      | $$   \  $/  |  $$$$$$$| $$      
+ |__/     |__/ \_______/|__/|__/  |__/      |_______/ |__/      |__/    \_/    \_______/|__/      
+                                                                                                  
+                                                                                                  
+                                                                                                  
+ 
+*/
 int main(){
 
-	int a[] = { 4,8,7 };
-	ofstream outfile;
+	int a[] = { 4,8,7 };									//creating an array named a 
+	ofstream outfile;										//creating out file cariable
 
-	outfile.open("output.dat");
+	outfile.open("output.dat");								//opening output file
 
-	Vector V1("input.dat");
+	Vector V1("input.dat");									//creating vector using data from file 
 
 	outfile << "Jarette Greene 2143 OOP" << endl;
 	outfile << "Program 1" << endl;
 	outfile << endl;
 
-	outfile << "V1 created through input file: ";
+	outfile << "V1 created through input file: ";			// displaying Vector
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
-	V1.Pushfront(10);
-	V1.Pushfront(3);
+	V1.Pushfront(10);										//pushes 1o to the front
+	V1.Pushfront(3);										//pushes 3	to the fron
 	
-	outfile << "V1 after front push: ";
+	outfile << "V1 after front push: ";						//displays Vector after push
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
-	V1.Pushrear(12);
-	V1.Pushrear(9);
+	V1.Pushrear(12);										//pushes 12 to the rear
+	V1.Pushrear(9);											// pushes 9 to the rear
 	
-	outfile << "V1 after rear push: ";
+	outfile << "V1 after rear push: ";						//displays vector after rear push
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
-	V1.Pushat(4, 15);
-	outfile << "V1 after pushing 15 to position 4: ";
+	V1.Pushat(4, 15);										//pushing 15 to the position 4
+	outfile << "V1 after pushing 15 to position 4: ";		//displaying list after push 
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
-	Vector V2(a,3);
-	outfile << "V2 created using array a: ";
+	Vector V2(a,3);											// creating second vector with a array of size 3
+	outfile << "V2 created using array a: ";				// displaying new vector
 	outfile << V2;
 	outfile << endl;
 	outfile << endl;
 
-	V1.Pushfront(V2);
+	V1.Pushfront(V2);										// pushing new vector to the front of old vector 
 
-	outfile << "V1 after pushing V2 to the front: ";
+	outfile << "V1 after pushing V2 to the front: ";		// displaying original vector after pushing the new vector 
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
-	int b[] = {0,11,6};
+	int b[] = {0,11,6};										//creating array named b
 
-	Vector V3(b, 3);
-	outfile << "created V3 using an array V3: "; 
+	Vector V3(b, 3);										// creating thrid vector using array sized 3
+	outfile << "created V3 using an array V3: "; 			// displaying third vector 
 	outfile << V3;
 	outfile << endl;
 	outfile << endl;  
-	Vector V4(V3);
-	outfile << "V4 created using V3: "; 
+	Vector V4(V3);											//create fourth vector using third vector 
+	outfile << "V4 created using V3: "; 					//displaying fourth vector
 	outfile << V4;
 	outfile << endl;
 	outfile << endl;
 
-	V1.Pushrear(V4);
+	V1.Pushrear(V4);										//pushing the fourth vector to the rear of the first 
 
-	outfile << "V1 after Pushing V4 to the rear: "; 
+	outfile << "V1 after Pushing V4 to the rear: "; 		//displaying first vector after pushing the fourth vector
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
 
-	V1.Pushinorder(5);
+	V1.Pushinorder(5);										// pushing 5 to approipriate spot in first vector
 
-	outfile << "V1 after sorting and pushing 5 in order: ";
+	outfile << "V1 after sorting and pushing 5 in order: "; //displaying sorted vector with 5 in its approipriate spot
 	outfile << V1;
 	outfile << endl;
 	outfile << endl;
 
 	int num = 0;
 
-	num =V1.PopFront();
+	num =V1.PopFront();										//popping the front off the Vector 
 	
-	outfile << "V1 after popping off the front :"; 
+	outfile << "V1 after popping off the front :"; 			// displaying vector after popping the front 
 	outfile << V1;
 	outfile << endl;
-	outfile << "Popped: " << num;
+	outfile << "Popped: " << num;							// displaying the data that was popped 
 	outfile << endl;
 	outfile << endl;
 
-	num = V1.Poprear();
+	num = V1.Poprear();										//popping the rear off the vector 
 
-	outfile << "V1 afteer popping off the rear :";
+	outfile << "V1 afteer popping off the rear :";			//displaying vector after popping the rear 
 	outfile << V1;
 	outfile << endl;
-	outfile << "popped: " << num;
+	outfile << "popped: " << num;							//displaying the data that was popped off the vector
 	outfile << endl;
 	outfile << endl;
 
 
-	num=V1.Popat(5);
+	num=V1.Popat(5);										// popping the data at the 5th position 
 
-	outfile << "V1 after popping data at position 5: ";
+	outfile << "V1 after popping data at position 5: ";		//displaying data after pop
 	outfile << V1;
 	outfile << endl;
-	outfile << "popped: " << num;
+	outfile << "popped: " << num;							//displaying the number that was popped 
 	outfile << endl;
 	outfile << endl;
 
-	num = V1.Find(7);
+	num = V1.Find(7);										//finding the number 7 in the list
 
-	outfile << "7 was at position " << num << " in V1";
+	outfile << "7 was at position " << num << " in V1";		//displaying the position of the number 7 in the list 
 	outfile << endl;
 
 	outfile.close();
