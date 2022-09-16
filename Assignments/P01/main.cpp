@@ -1,8 +1,57 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jarettegreene09@gmail.com
+*  Label:            P01
+*  Title:            Linked List Vector Class
+*  Course:           CMPS 2143
+*  Semester:         Fall 2022
+* 
+*  Description:
+*       	This program is used to create a Linked List based vector class and 
+*			demonstrate my ability to create a beginner level class. This is done
+*			by creating a linked list class that allow for pushing data (ints) to 
+* 			to both ends of the list, at any position and also sort the list and 
+* 			place the approipriate position, and push another vector onto another. 
+* 			It will also allows you to pop items off the front and rear and at a 
+*			position and find the position of an item. This List will also allow you 
+* 			create the list using a array, items from an input file, and another vector.
+* 
+*  Usage:
+*        N/A
+* 
+*  Files:            
+*			main.cpp				:driver program
+*			input.dat				:file to collect data to make list
+*			output.dat				:to display list
+*
+*****************************************************************************/
 #include <iostream>
 #include <fstream>
 #include <string>
 
 using namespace std;
+/**
+ * Node
+ * 
+ * Description:
+ *      Creating struct to create a node to store data and hold pointers 
+ * 		for next node and previous node.
+ * 
+ * Member variables:
+ * 				int 				data
+ * 				Node*				next
+ * 				Node*				prev
+ * 
+ * Public Method:
+ * 				
+ * 									Node(int d)
+ *  
+ * Usage: 
+ * 
+ *      Node(d)						// creates an instance of a node
+ *      
+ */
 struct Node {
 	int data;
 	Node* next;
@@ -13,10 +62,79 @@ struct Node {
 		Prev = NULL;
 	}
 };
+/**
+ * Vector
+ * 
+ * Description:
+ *      This class implements a linked list based class that allows you
+ * 		and allows you to add items to the rear and front of the list, at 
+ * 		any position you would like, in approipriate order and push another 
+ * 		vector class to the front or rear of the current list. It will also 
+ * 		allows you to pop items off the rear or front and at any position you 
+ * 		would like and also find any item in the list. This will also allow you to 
+ * 		create a list using an array, items from a file and another vector.
+ * 
+ * Public Methods:
+ *      						Vector()
+ * 								Vector(int* a, int size)
+ * 								Vector(string filename)
+ * 								Vector(const Vector &V)
+ * 		bool					isSorted()
+ * 		void					Sort()
+ * 		void					Print()
+ * 		int size				size()
+ * 		void 					Pushfront(int d)
+ * 		void					Pushfront(Vector V)
+ * 		void 					Pushrear(int d)
+ * 		void 					Pushrear(Vector V)
+ * 		void 					Pushat(int loc,int d)
+ * 		void					Pushinorder(int d)
+ * 		int						Popfront()
+ * 		int 					Poprear()
+ * 		int 					Popat(int loc)
+ * 		int 					Find(int d)
+ * 		friend ofstream&		<<operator(ofstream&, const Vector&)
+ * 				
+ * Private Methods:
+ *     	Node*					head
+ * 		Node*					head
+ * 
+ * Usage: 
+ * 
+ *      Vector(a,5) 			//create a vector using an array of size 5
+ *      Vector("input.dat")		//creates a vector using data from a file 
+ * 		Vector(V)				//creates a vector using another vector
+ * 		V1.Pushfont(1)			//pushes 1 to the front of list
+ * 		V1.Pushfront(V2)		//Pushes vector to the front of list
+ * 		V1.Pushrear(1)			//pushes  1 to the rear of the vector
+ * 		V1.Pushrear(V2)			//pushes vector to the rear of list
+ * 		V1.Pushat(2,5)			//pushes 5 at the 2nd location in list
+ * 		V1.Pushinorder(2)		//sorts list then places 2 in correct order
+ * 		V1.Popfront				//pops off the front of the list
+ * 		V1.Poprear				//pops off the rear of the list 
+ * 		V1.Popat(4)				//pops the item at position 4 in the list 
+ * 		V1.Find(2)				//locates the position of 2 in the list 
+ * 		cout << V1				// displays entire list
+ */
 class Vector {
 private:
 	Node* head;
 	Node* tail;
+/*
+ 
+                                            /$$                                     /$$                        
+                                           | $$                                    | $$                        
+   /$$$$$$$  /$$$$$$  /$$$$$$$   /$$$$$$$ /$$$$$$    /$$$$$$  /$$   /$$  /$$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$ 
+  /$$_____/ /$$__  $$| $$__  $$ /$$_____/|_  $$_/   /$$__  $$| $$  | $$ /$$_____/|_  $$_/   /$$__  $$ /$$__  $$
+ | $$      | $$  \ $$| $$  \ $$|  $$$$$$   | $$    | $$  \__/| $$  | $$| $$        | $$    | $$  \ $$| $$  \__/
+ | $$      | $$  | $$| $$  | $$ \____  $$  | $$ /$$| $$      | $$  | $$| $$        | $$ /$$| $$  | $$| $$      
+ |  $$$$$$$|  $$$$$$/| $$  | $$ /$$$$$$$/  |  $$$$/| $$      |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
+  \_______/ \______/ |__/  |__/|_______/    \___/  |__/       \______/  \_______/   \___/   \______/ |__/      
+                                                                                                               
+                                                                                                               
+                                                                                                               
+ 
+*/
 public: 
 	Vector() {
 		head = NULL;
@@ -54,6 +172,18 @@ public:
 		
 
 	}
+	 /**
+     * Public : isSorted
+     * 
+     * Description:
+     *      checks to see if the list is sorted
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      Bool 			a true or false if the list is sorted
+     */
 	bool isSorted() {
 		int count = 0;
 		
@@ -70,7 +200,18 @@ public:
 		return count == 0;
 		
 	}
-	
+	 /**
+     * Public : Sort
+     * 
+     * Description:
+     *      Sorts the Vector list
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      Vector 		returns a sorted list
+     */
 	void Sort() {
 		bool notSorted = true;
 		int i = 0;
@@ -92,6 +233,18 @@ public:
 			}
 		}
 	}
+	 /**
+     * Public : Print
+     * 
+     * Description:
+     *      displays the vector list
+     * 
+     * Params:
+     *      N/A
+	 * 
+     * Returns:
+     *      N/A
+     */
 	void Print() {
 		Node* traverse = head;
 		while (traverse) {
@@ -99,6 +252,18 @@ public:
 			traverse = traverse->next;
 		}
 	}
+	 /**
+     * Public : size
+     * 
+     * Description:
+     *      checks the size of the list
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      int 	:the size of the list
+     */
 	int size() {
 		int count = 0;
 		Node* traverse = head;
@@ -108,6 +273,19 @@ public:
 		}
 		return count;
 	}
+	 /**
+     * Public : Pushfront
+     * 
+     * Description:
+     *      Adds item to the front of the ist 
+     * 
+     * Params:
+     *    
+     *      int     :  data to be added
+     * 
+     * Returns:
+     *      N/A
+     */
 	void Pushfront(int d){
 		Node* temp = new Node(d);
 		if (head == NULL) {
@@ -120,11 +298,36 @@ public:
 			head = temp;
 		}
 	}
+	 /**
+     * Public : Pushfront
+     * 
+     * Description:
+     *      adds another vector class list ot the front of the current list
+     * 
+     * Params:
+     *      Vector		V the vector to be pushed
+     * 
+     * Returns:
+     *      N/A
+     */
 	void Pushfront(Vector V){
 		V.tail->next = head;
 		head->Prev = V.tail;
 		head = V.head;
 	}
+	 /**
+     * Public : Pushrear
+     * 
+     * Description:
+     *      Adds item to the list at the back
+     * 
+     * Params:
+     *     
+     *      int     	data: the data to be added 
+     * 
+     * Returns:
+     *      N/A
+     */
 	void Pushrear(int d){
 		Node* temp = new Node(d);
 		if (head == NULL) {
@@ -139,11 +342,35 @@ public:
 			tail = temp;
 		}
 	}
+	 /**
+     * Public : Pushrear
+     * 
+     * Description:
+     *      Pushes another vector to the back of the current vector 
+     * 
+     * Params:
+     *      Vector			V : the vector to be pushed 
+     * 
+     * Returns:
+     *      N/A
+     */
 	void Pushrear(Vector V){
 		tail->next = V.head;
 		V.head->Prev = tail;
 		tail = V.tail;
 	}
+	 /**
+     * Public : Pushat
+     * 
+     * Description:
+     *      adds item to the list at a specified location
+     * 
+     * Params:
+     *      int				d: data to be added 
+     * 		int				loc: location to add data
+     * Returns:
+     *      N/A
+     */
 	void Pushat(int loc, int d){
 		Node* temp = new Node(d);
 		if (loc == 1) {
@@ -163,6 +390,18 @@ public:
 			traverse->Prev = temp;
 		}
 	}
+	 /**
+     * Public : Pushinorder
+     * 
+     * Description:
+     *      sorts list then adds item in approipriate position 
+     * 
+     * Params:
+     *      int			d: data to be added 
+     * 
+     * Returns:
+     *      N/A
+     */
 	void Pushinorder(int d){
 		if (!isSorted()) {
 			Sort();
@@ -189,7 +428,18 @@ public:
 
 		}
 	}
-
+ /**
+     * Public : Popfront
+     * 
+     * Description:
+     *      removes item from the front of the list and gives you back the item
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      int  	The item that was popped off the list 
+     */
 	int PopFront(){
 		int num = head->data;
 		Node* temp = head;
@@ -204,6 +454,18 @@ public:
 			return num;
 		}
 	}
+	 /**
+     * Public : Poprear
+     * 
+     * Description:
+     *      Removes item off the back of the list and gives you back the item
+     * 
+     * Params:
+     *      N/A
+	 * 
+     * Returns:
+     *      int 	 : the item that was popped off of the list
+     */
 	int Poprear(){
 		int num = tail->data;
 		Node* temp = tail;
@@ -218,6 +480,18 @@ public:
 			return num;
 		}
 	}
+	 /**
+     * Public : Popat
+     * 
+     * Description:
+     *      removes the item at a specified location then gives you back that item
+     * 
+     * Params:
+     *      int 	loc: the location of the item you want ot remove
+     * 
+     * Returns:
+     *      int 	:returns the item that was removed
+     */
 	int Popat(int loc){
 		int num;
 		if (head == NULL) {
@@ -242,6 +516,18 @@ public:
 			return num;
 		}
 	}
+	 /**
+     * Public : Find 
+     * 
+     * Description:
+     *  	locates the position of the item you request and gives you that position 	
+     * 
+     * Params:
+     *      int 	d: the item you are looking for 
+     * 
+     * Returns:
+     *      int 	:the position of the item you are looking for in the list 
+     */
 	int Find(int d){
 		Node* traverse = head;
 		int count = 0;
@@ -273,7 +559,19 @@ public:
 
 	
 };
-
+ /**
+     * Public : operator <<
+     * 
+     * Description:
+     *      overloads the << operator to allow to display the entire list at once 
+     * 
+     * Params:
+     *      ofstream&		out:<< the outfile variable that allows for displaying data 
+	 * 		const Vector&	V1: the vector that is being displayed 
+     * 
+     * Returns:
+     *      ofstream&	 	ofstream that allows for displaying of data 
+     */
 ofstream& operator<<(ofstream& outfile, const Vector& V) {
 	Node* traverse = V.head;
 	while (traverse != NULL) {
