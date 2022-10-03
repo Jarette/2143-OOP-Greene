@@ -2,7 +2,7 @@
 ### Jarette Greene
 ### Description: 
 
-    			 This program is uses my previously created vector class and overloaded 
+    	    This program is uses my previously created vector class and overloaded 
            operators to allow easier use of the vector class. operators overloaded 
            are <<, [],+,-,/,*,==.
 
