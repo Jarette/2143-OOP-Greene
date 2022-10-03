@@ -3,7 +3,7 @@
 *  Author:           Jarette Greene
 *  Email:            jarettegreene09@gmail.com
 *  Label:            P01
-*  Title:            Linked List Vector Class
+*  Title:            Linked List Vector Class 2
 *  Course:           CMPS 2143
 *  Semester:         Fall 2022
 *
@@ -94,7 +94,17 @@ struct Node {
  * 		int 					Poprear()
  * 		int 					Popat(int loc)
  * 		int 					Find(int d)
- * 		friend ofstream&		<<operator(ofstream&, const Vector&)
+ * 		int& 					operator[](int)
+ * 		Vector& 				operator=(const Vector&)
+ * 		friend ofstream&		operator<<(ofstream&, const Vector&)
+ * 		friend ofstream&		operator<<(ofstream&, const int*);
+		friend ostream& 		operator<<(ostream&, const Vector&); 
+		friend ostream& 		operator<<(ostream&, const int*);
+		friend bool 			operator==(const Vector&, const Vector&);
+		friend Vector& 			operator/(const Vector&, const Vector&);
+		friend Vector& 			operator*(const Vector&, const Vector&);
+		friend Vector& 			operator-(const Vector&, const Vector&);
+		friend Vector& 			operator+(const Vector&, const Vector&);
  *
  * Private Methods:
  *     	Node*					head
@@ -115,7 +125,16 @@ struct Node {
  * 		V1.Poprear				//pops off the rear of the list
  * 		V1.Popat(4)				//pops the item at position 4 in the list
  * 		V1.Find(2)				//locates the position of 2 in the list
- * 		cout << V1				// displays entire list
+ * 		V1[0]					// allows for accessing elements like in an array
+ * 		V2 = V1					// allows for assigning values from one vector to 
+ * 								// another
+ * 		cout/outfie << V1		// displays entire list
+ * 		cout/outfile << V1[0]	// displays element at position using indexing 
+ * 		(V1 == V2)				// compares the equality of two vectors
+ * 		v3 = v1/v2				// allows for dividing the elements of 2 vectors
+ * 		v3 = v1*v2				// allows for multiplying the elements of 2 vectors
+ * 		v3 = v1-v2				// allows for subtracting the elements of 2 vectors
+ * 		v3 = v1+v2				// allows for adding the elements of 2 vectors
  */
 class Vector {
 private:
@@ -554,33 +573,65 @@ public:
 			}
 		}
 	}
+	/**
+	 * Public operator[]
+	 * 
+	 * Description:
+	 * 		allows for you to access and manipulate the data at a position in an  vector 
+	 * 		similarly to the way you access elements in an array.
+	 * 
+	 * Params:
+	 * 		int		index: the position in the vector you would like to access
+	 * 
+	 * Returns:
+	 * 		int&	the address of the data you want to access
+	 * 
+	 */
 	int& operator[](int index) {
 		Vector V;
 		Node* traverse = head;
+		// checking to see if the position is greater than the size of the vector
 		if (index > size()) {
 			cout << "invalid index";
 			int a = 0;
 			return a;
 		}
 		else {
+			// traversing vector to find desired position
 			for (int i = 0; i != index; i++) {
 				traverse = traverse->next;
 			}
 			return traverse->data;
 		}
 	}
+	/**
+	 * Public operator=
+	 * 
+	 * Description:
+	 * 		assigns the data stored in one vector to another vector using the = sign
+	 * 
+	 * Params:
+	 * 		const Vector&	V : the vector that you would like to values you would like to pass 
+	 * 
+	 * Returns:
+	 * 		Vector&:	The vector that you are planning to store the values in 
+	 * 
+	 */
 	Vector& operator=(const Vector& V) {
+		// checking self assignment
 		if (this == &V) {
 			return *this;
 		}
 		else {
 			Vector V1;
 			Node* traverse2 = V.head;
+			// pushing values on to a new vector
 			while (traverse2) {
 				V1.Pushrear(traverse2->data);
 				traverse2 = traverse2->next;
 
 			}
+			// reassigning head and tail to new vector
 			this->head = V1.head;
 			this->tail = V1.tail;
 
@@ -588,9 +639,10 @@ public:
 		}
 	}
 
-	friend ofstream& operator<<(ofstream&, const Vector&); // allows for class to use this function 
+	// friend classes that are not defined inthe class but has access to it 
+	friend ofstream& operator<<(ofstream&, const Vector&); 
 	friend ofstream& operator<<(ofstream&, const int*);
-	friend ostream& operator<<(ostream&, const Vector&); // overloading ostream << operator
+	friend ostream& operator<<(ostream&, const Vector&); 
 	friend ostream& operator<<(ostream&, const int*);
 	friend bool operator==(const Vector&, const Vector&);
 	friend Vector& operator/(const Vector&, const Vector&);
@@ -621,6 +673,19 @@ ofstream& operator<<(ofstream& outfile, const Vector& V) {
 	}
 	return outfile;
 }
+/**
+	* Public : operator <<
+	*
+	* Description:
+	*      overloads the << operator to allow to display the entire list at once
+	*
+	* Params:
+	*      ostream&		out:<< the cout variable that allows for displaying data
+	* 	   const Vector&	V1: the vector that is being displayed
+	*
+	* Returns:
+	*      ostream&	 	ofstream that allows for displaying of data
+	*/
 ostream& operator<<(ostream& os, const Vector& V) {
 	Node* traverse = V.head;
 	while (traverse != NULL) {					//goes through entire list and dispalays as it traverses
@@ -629,30 +694,73 @@ ostream& operator<<(ostream& os, const Vector& V) {
 	}
 	return os;
 }
+/**
+	* Public : operator <<
+	*
+	* Description:
+	*      overloads the << operator to allow to display the entire list at once
+	*
+	* Params:
+	*      ofstream&		out:<< the outfile variable that allows for displaying data
+	* 	   const int*		a: the int address you would like to access 
+	*
+	* Returns:
+	*      ofstream&	 	ofstream that allows for displaying of data
+	*/
 ostream& operator<<(ostream& os, const int* a) {
+	// checking if the address is full or empty
 	if (a == nullptr) {
 		os << "invalid index";
 	}
 	else {
+		//displaying the data stored in that position
 		os << *a;
 	}
 	return os;
 }
+/**
+	* Public : operator <<
+	*
+	* Description:
+	*      overloads the << operator to allow to display the entire list at once
+	*
+	* Params:
+	*      ostream&		out:<< the outfile variable that allows for displaying data
+	* 	   const int*		a: the int address you would like to access 
+	*
+	* Returns:
+	*      ostream&	 	ofstream that allows for displaying of data
+	*/
 ofstream& operator<<(ofstream& os, const int* a) {
+	// checking if the address is full or empty
 	if (a == nullptr) {
 		os << "invalid index";
 	}
 	else {
+		// displaing the dta stored in that position
 		os << *a;
 	}
 	return os;
 }
+/**
+	* Public : operator +
+	*
+	* Description:
+	*      overloads the + operator to allow to add the elements of two vectors together 
+	*
+	* Params:
+	*      const Vector&	a,b : the vectors that are being added togther 
+	*
+	* Returns:
+	*      Vector&	: the vector that will return the data that will be added togehter
+	*/
 Vector& operator+(const Vector& a, const Vector& b) {
 	Vector V;
 	Node* traverse1 = a.head;
 	Node* traverse2 = b.head;
 	int sizea = 0;
 	int sizeb = 0;
+	//  getting the sizes of the vectors that will be added 
 	while (traverse1) {
 		sizea++;
 		traverse1 = traverse1->next;
@@ -661,14 +769,18 @@ Vector& operator+(const Vector& a, const Vector& b) {
 		sizeb++;
 		traverse2 = traverse2->next;
 	}
+	// repointing traverse to heads
 	traverse1 = a.head;
 	traverse2 = b.head;
+	// checks if the first vector is larger that the other 
 	if (sizea > sizeb) {
+		// adds the elements of both vectors and pushes to the rear 
 		for (int i = 0; i != sizeb; i++) {
 			V.Pushrear(traverse1->data + traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		// pushes the remaining elements of the first vector
 		while (traverse1) {
 			V.Pushrear(traverse1->data);
 			traverse1 = traverse1->next;
@@ -677,12 +789,15 @@ Vector& operator+(const Vector& a, const Vector& b) {
 		delete traverse2;
 		return V;
 	}
+	// checks if the second vector is larger than the other 
 	else if (sizeb > sizea) {
+		// adds the elements and pushes to new vector
 		for (int i = 0; i != sizea; i++) {
 			V.Pushrear(traverse1->data + traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		//pushes the remaining elements in the second vector 
 		while (traverse2) {
 			V.Pushrear(traverse2->data);
 			traverse2 = traverse2->next;
@@ -692,6 +807,7 @@ Vector& operator+(const Vector& a, const Vector& b) {
 		return V;
 	}
 	else {
+		// adds the elements and pushes them to the new vector
 		while (traverse1) {
 			V.Pushrear(traverse1->data + traverse2->data);
 			traverse1 = traverse1->next;
@@ -704,12 +820,25 @@ Vector& operator+(const Vector& a, const Vector& b) {
 
 
 }
+/**
+	* Public : operator -
+	*
+	* Description:
+	*      overloads the - operator to allow to subtract the elements of two vectors together 
+	*
+	* Params:
+	*      const Vector&	a,b : the vectors that are being subtracted
+	*
+	* Returns:
+	*      Vector&	: the vector that will return the data that will be subtracted 
+	*/
 Vector& operator-(const Vector& a, const Vector& b) {
 	Vector V;
 	Node* traverse1 = a.head;
 	Node* traverse2 = b.head;
 	int sizea = 0;
 	int sizeb = 0;
+	// getting the size of both vectors
 	while (traverse1) {
 		sizea++;
 		traverse1 = traverse1->next;
@@ -720,12 +849,15 @@ Vector& operator-(const Vector& a, const Vector& b) {
 	}
 	traverse1 = a.head;
 	traverse2 = b.head;
+	// checking if vector 1 is larger than vector 2
 	if (sizea > sizeb) {
+		// subtracts the elements of the  vector and pushes it to new vector
 		for (int i = 0; i != sizeb; i++) {
 			V.Pushrear(traverse1->data - traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		// pushes the remaining elements of vector 1 to new vector
 		while (traverse1) {
 			V.Pushrear(traverse1->data);
 			traverse1 = traverse1->next;
@@ -734,12 +866,15 @@ Vector& operator-(const Vector& a, const Vector& b) {
 		delete traverse2;
 		return V;
 	}
+	//checking if vector 2 is larger than vector 1
 	else if (sizeb > sizea) {
+		// subtracts the of the vectors and pushes it to new vector 
 		for (int i = 0; i != sizea; i++) {
 			V.Pushrear(traverse1->data - traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		// pushes the remaining elements of vector 2 to new vector 
 		while (traverse2) {
 			V.Pushrear(traverse2->data);
 			traverse2 = traverse2->next;
@@ -749,6 +884,7 @@ Vector& operator-(const Vector& a, const Vector& b) {
 		return V;
 	}
 	else {
+		// subtracts the of the vectors and pushes it to new vector 
 		while (traverse1) {
 			V.Pushrear(traverse1->data - traverse2->data);
 			traverse1 = traverse1->next;
@@ -761,12 +897,25 @@ Vector& operator-(const Vector& a, const Vector& b) {
 
 
 }
+/**
+	* Public : operator *
+	*
+	* Description:
+	*      overloads the * operator to allow to multiply the elements of two vectors together 
+	*
+	* Params:
+	*      const Vector&	a,b : the vectors that are being multiplied
+	*
+	* Returns:
+	*      Vector&	: the vector that will return the data that will be multiplied 
+	*/
 Vector& operator*(const Vector& a, const Vector& b) {
 	Vector V;
 	Node* traverse1 = a.head;
 	Node* traverse2 = b.head;
 	int sizea = 0;
 	int sizeb = 0;
+	// getting the size of both vector
 	while (traverse1) {
 		sizea++;
 		traverse1 = traverse1->next;
@@ -777,12 +926,15 @@ Vector& operator*(const Vector& a, const Vector& b) {
 	}
 	traverse1 = a.head;
 	traverse2 = b.head;
+	// checking if vector 1 is larger than vector 2 
 	if (sizea > sizeb) {
+		// multiplying elements of both vectors and pushing it to the new vector
 		for (int i = 0; i != sizeb; i++) {
 			V.Pushrear(traverse1->data * traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		// pushes the remianing elements to the vector 
 		while (traverse1) {
 			V.Pushrear(traverse1->data);
 			traverse1 = traverse1->next;
@@ -791,13 +943,16 @@ Vector& operator*(const Vector& a, const Vector& b) {
 		delete traverse2;
 		return V;
 	}
+	// checking if vector 2 is larger than vector 1 
 	else if (sizeb > sizea) {
+		// multiplying elements of both vectors and pushing it to the new vector
 		for (int i = 0; i != sizea; i++) {
 			V.Pushrear(traverse1->data * traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
 		while (traverse2) {
+			// pushes the remianing elements to the vector 
 			V.Pushrear(traverse2->data);
 			traverse2 = traverse2->next;
 		}
@@ -807,6 +962,7 @@ Vector& operator*(const Vector& a, const Vector& b) {
 	}
 	else {
 		while (traverse1) {
+			// multiplying elements of both vectors and pushing it to the new vector
 			V.Pushrear(traverse1->data * traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
@@ -818,12 +974,25 @@ Vector& operator*(const Vector& a, const Vector& b) {
 
 
 }
+/**
+	* Public : operator *
+	*
+	* Description:
+	*      overloads the * operator to allow to multiply the elements of two vectors together 
+	*
+	* Params:
+	*      const Vector&	a,b : the vectors that are being multiplied
+	*
+	* Returns:
+	*      Vector&	: the vector that will return the data that will be multiplied 
+	*/
 Vector& operator/(const Vector& a, const Vector& b) {
 	Vector V;
 	Node* traverse1 = a.head;
 	Node* traverse2 = b.head;
 	int sizea = 0;
 	int sizeb = 0;
+	// getting the sizes of both vectors 
 	while (traverse1) {
 		sizea++;
 		traverse1 = traverse1->next;
@@ -834,12 +1003,15 @@ Vector& operator/(const Vector& a, const Vector& b) {
 	}
 	traverse1 = a.head;
 	traverse2 = b.head;
+	//checking if Vector 1 is larger than vector 2
 	if (sizea > sizeb) {
 		for (int i = 0; i != sizeb; i++) {
+			//divides the elements of both vectors and pushes to new vector 
 			V.Pushrear(traverse1->data / traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
+		// pushes the remaining elements
 		while (traverse1) {
 			V.Pushrear(traverse1->data);
 			traverse1 = traverse1->next;
@@ -848,13 +1020,16 @@ Vector& operator/(const Vector& a, const Vector& b) {
 		delete traverse2;
 		return V;
 	}
+	//checking if Vector 2 is larger than vector 1
 	else if (sizeb > sizea) {
 		for (int i = 0; i != sizea; i++) {
+			//divides the elements of both vectors and pushes to new vector 
 			V.Pushrear(traverse1->data / traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
 		}
 		while (traverse2) {
+			// pushes the remaining elements
 			V.Pushrear(traverse2->data);
 			traverse2 = traverse2->next;
 		}
@@ -864,6 +1039,7 @@ Vector& operator/(const Vector& a, const Vector& b) {
 	}
 	else {
 		while (traverse1) {
+			//divides the elements of both vectors and pushes to new vector 
 			V.Pushrear(traverse1->data / traverse2->data);
 			traverse1 = traverse1->next;
 			traverse2 = traverse2->next;
@@ -875,12 +1051,25 @@ Vector& operator/(const Vector& a, const Vector& b) {
 
 
 }
+/**
+	* Public : operator ==
+	*
+	* Description:
+	*      overloads the == operator to allow to check if both vectors are the same
+	*
+	* Params:
+	*      const Vector&	a,b : the vectors that are being evaluated 
+	*
+	* Returns:
+	*      bool:	true or false based on if the vectors are equal or not 
+	*/
 bool operator==(const Vector& a, const Vector& b) {
 	Node* traverse1 = a.head;
 	Node* traverse2 = b.head;
 	int sizea = 0;
 	int sizeb = 0;
 	int count = 0;
+	//getting the sizes of each vectors 
 	while (traverse1) {
 		sizea++;
 		traverse1 = traverse1->next;
@@ -891,6 +1080,7 @@ bool operator==(const Vector& a, const Vector& b) {
 	}
 	traverse1 = a.head;
 	traverse2 = b.head;
+	//checking if the both vectors are the same size if not return false
 	if (sizea > sizeb) {
 		return false;
 	}
@@ -898,8 +1088,10 @@ bool operator==(const Vector& a, const Vector& b) {
 		return false;
 	}
 	else {
+		// checking if the values of both vectors are equal
 		while (traverse1) {
 			if (traverse1->data == traverse2->data) {
+				// increment count every time the elements are equal
 				count++;
 			}
 			traverse1 = traverse1->next;
@@ -907,6 +1099,7 @@ bool operator==(const Vector& a, const Vector& b) {
 		}
 		delete traverse1;
 		delete traverse2;
+		// checking if count is equal to the size return true if it is return false if not
 		if (count == sizea) {
 			return true;
 		}
@@ -1053,7 +1246,7 @@ int main() {
 	Vector v2(a2, 3);
 
 	outfile << endl;
-	outfile << "New vector v1: " << v1;
+	outfile << "New vector v1: " << v1;		//creating new vector
 	outfile << endl;
 	outfile << endl;
 	outfile << "New vector v2: " << v2;
@@ -1061,16 +1254,16 @@ int main() {
 	outfile << endl;
 
 	outfile << "displaying data in position 2 of v1 using array indexing v1[2]: ";
-	outfile << v1[2];
+	outfile << v1[2];				//accessing vectors using indexing 
 	outfile << endl;
 	outfile << endl;
 
-	v1[4] = 9;
+	v1[4] = 9;						// manipluating data using indexing 
 	outfile << "reassigning data at v1[4] to 9: " << v1;
 	outfile << endl;
 	outfile << endl;
 
-	Vector v3 = v1 + v2;
+	Vector v3 = v1 + v2;			//adding the elements of two vectors 
 	outfile << "Vector v3 created by v1+v2: " << v3;
 	outfile << endl;
 	outfile << endl;
@@ -1079,7 +1272,7 @@ int main() {
 	outfile << endl;
 	outfile << endl;
 
-	v3 = v1 - v2;
+	v3 = v1 - v2;					//subtracting the elements of two vectors
 	outfile << "v3 = v1 - v2: " << v3;
 	outfile << endl;
 	outfile << endl;
@@ -1088,7 +1281,7 @@ int main() {
 	outfile << endl;
 	outfile << endl;
 	
-	v3 = v2 * v1;
+	v3 = v2 * v1;				//subtracting the elements of two vectors
 	outfile << "v3 = v2 * v1: " << v3;
 	outfile << endl;
 	outfile << endl;
@@ -1097,7 +1290,7 @@ int main() {
 	outfile << endl;
 	outfile << endl;
 
-	v3 = v1 / v2;
+	v3 = v1 / v2;				// dividing the elements of two vectors
 	outfile << "v3 = v1 / v2: " << v3;
 	outfile << endl;
 	outfile << endl;
@@ -1110,12 +1303,12 @@ int main() {
 	outfile << endl;
 	outfile << endl;
 
-	Vector v4 = v1;
+	Vector v4 = v1;				//assigning vector using = 
 	outfile << "creating v4 using v4 = v1: " << v4;
 	outfile << endl;
 	outfile << endl;
 
-	outfile << "(v2 == v1) = " << (v2 == v1);
+	outfile << "(v2 == v1) = " << (v2 == v1); // using bolean operators to compare vectors
 	outfile << endl;
 	outfile << endl;
 
