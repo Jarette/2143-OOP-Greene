@@ -23,14 +23,14 @@
  cout << V1;            //displays entire vector
  outfile << V1;
  
- V1[0] = 9              // allows to access data in vector using array indexing 
+ V1[0] = 9;             // allows to access data in vector using array indexing 
  
- V3 = V1 + V2         // used to add the elements of 2 vectors and save to new vector
+ V3 = V1 + V2;        // used to add the elements of 2 vectors and save to new vector
  
- V3 = V1 - V2         // used to subtract the elements of 2 vectors and save to new vector
+ V3 = V1 - V2;         // used to subtract the elements of 2 vectors and save to new vector
  
- V3 = V1 / V2         // used to divide the elements of 2 vectors and save to new vector
+ V3 = V1 / V2;         // used to divide the elements of 2 vectors and save to new vector
  
- V3 = V1 * V2         // used to multiply the elements of 2 vectors and save to new vector
+ V3 = V1 * V2;         // used to multiply the elements of 2 vectors and save to new vector
  
- (V1 == V2)           // used to check if both vectors are the same and returns true or false 
+ (V1 == V2);           // used to check if both vectors are the same and returns true or false 
