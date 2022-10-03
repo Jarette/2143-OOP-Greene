@@ -5,3 +5,4 @@
 |    1  | [A03](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/A03)| Assignment to ensure proper commenting and README creation|
 |    2  | [A04](https://github.com/Jarette/2143-OOP-Greene/tree/main/Assignments/A04)| Assignment to define Object oriented Programming terminology|
 |    3  | [P01](https://github.com/Jarette/2143-OOP-Greene/tree/main/Assignments/P01)| Programming assignemtn to build linked list vector class|
+|    4  | [P02](https://github.com/Jarette/2143-OOP-Greene/tree/main/Assignments/P02)| overloading operators in vector class|
