@@ -16,7 +16,7 @@ Encapsulation is the grouping of data and functions together and hiding
 thier implementation by restricting the access using access modifiers
 to keep selected pieces private.
 
-# Example of Encapsulation: 
+### Example of Encapsulation: 
 ```
 class Myclass{
     private:
