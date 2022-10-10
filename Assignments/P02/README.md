@@ -12,7 +12,7 @@
 | :---: | -------- | -------------------------------- |
 |   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/main.cpp)| Main driver of my list program . |
 |   2   |[input.dat](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/input.dat)| Input file.|
-|   3   |[output.dat](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/output.txt)| output file.|
+|   3   |[output.dat](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/test.out)| output file.|
 
 ### Instructions
 

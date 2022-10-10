@@ -2,15 +2,22 @@
 *
 *  Author:           Jarette Greene
 *  Email:            jarettegreene09@gmail.com
-*  Label:            P01
+*  Label:            P02
 *  Title:            Linked List Vector Class 2
 *  Course:           CMPS 2143
 *  Semester:         Fall 2022
 *
 *  Description:
-*       This program is uses my previously created vector class and overloaded 
-*      operators to allow easier use of the vector class. operators overloaded 
-*       are <<, [],+,-,/,*,==.
+*		This program is used to create a Linked List based vector class and 
+*		demonstrate my ability to create a beginner level class. This is done
+*		by creating a linked list class that allow for pushing data (ints) to 
+* 		to both ends of the list, at any position and also sort the list and 
+* 		place the approipriate position, and push another vector onto another. 
+* 		It will also allows you to pop items off the front and rear and at a 
+*		position and find the position of an item. This List will also allow you 
+* 		create the list using a array, items from an input file, and another vector.
+*       This program is uses overloaded operators to allow easier use of the
+*		vector class. operators overloaded are <<, [],+,-,/,*,==.
 *
 *  Usage:
 *        N/A
@@ -1124,7 +1131,7 @@ int main() {
 	int a[] = { 4,8,7 };									//creating an array named a 
 	ofstream outfile;										//creating out file cariable
 
-	outfile.open("output.txt");								//opening output file
+	outfile.open("test.out");								//opening output file
 
 	Vector V1("input.dat");									//creating vector using data from file 
 
