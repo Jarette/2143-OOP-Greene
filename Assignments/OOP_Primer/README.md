@@ -96,7 +96,8 @@ Dynamic Polymorphism is this when functions are defined using the keyword
 virtual.
 
 ### example of dynaimic polymorphism
-![dynamic](https://ibb.co/mR5933R)
+
+![virtual](https://namangupta01.medium.com/virtual-function-in-java-vs-c-d75874d23/assets/images/1_opiixjYf05Y8GE9buOxDZw.png)
 
 
 
