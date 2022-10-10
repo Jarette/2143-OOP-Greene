@@ -187,7 +187,7 @@ private:
 ## Instance Variables
 
 Instance variables are variables that are defined with every instance of 
-an object being created.
+an object being created that are distinct for each object.
 
 ### example of instance variables
 
@@ -199,6 +199,24 @@ private:
     int c;
 };
 ```
+
+## Member Varibles 
+
+Member variables are similar to instance variables and in some languages 
+are all the same. Member variables are variables that are associated with 
+a specfic object and can be accessed by methods in the class. These 
+variables can share names with methods.
+
+```
+class Myclass{
+private:
+    int a;
+    int b;
+public:
+    int Add(){
+        return a+b;
+    }
+};
 
 
 
