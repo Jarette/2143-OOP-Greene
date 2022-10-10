@@ -281,4 +281,22 @@ Public:
 
 # Other Keywords important in OOP
 
-##
+## Friend
+
+The Friend keyword allows for classes to have access to functions that are not defined outside of the class
+
+### example of using the Friend keyword
+
+```
+class Myclass{
+private:
+    int a;
+public: 
+    friend void print();
+};
+
+void print(){
+    cout << "friend keyword";
+}
+```
+
