@@ -124,6 +124,10 @@ public:
     void setage(a);
 };
 ```
+## Subclass
+
+A subclass is a class that is derived from another class sometimes 
+refered to as child class and the original class as the parent class
 
 ## Object
 
@@ -217,11 +221,64 @@ public:
         return a+b;
     }
 };
+```
+## Constructor
+  
+A constructor is a member function that shares the name of the class and
+is used to initialize the variables in a class.
 
+### exampe of a constructor 
 
+```
+class Myclass{
+private:
+    int a;
+    int b;
+public:
+    Myclass(){
+        a = 1;
+        b = 2;
+    }
+};
+```
 
+## Access Modifiers
 
+Access modifiers are key words used when creatng a class that restrict the
+access of certian pieces of data for different objects or other classes 
+that might be derived from this class. These access modifiers are:
 
+### Private
 
+Private restricts access of data to only methods or functions that are 
+found within the class itself. So objects and outside functions would not 
+be able change an of the data located under this heading.
 
+### Protected
 
+Protected is Similar to private but allows access to classes that are derived from the original class but not objects that are created from 
+the class
+
+### Public 
+
+The public key word allows for classes, subclasses and objects that 
+created using the class to get access to any attributes and methods that 
+were under this heading.
+
+### example of use of access modifiers
+
+```
+myclass{
+private:
+    string address
+    int SSN
+Protected:
+    string name
+Public:
+    string getname();
+}
+```
+
+# Other Keywords important in OOP
+
+##
