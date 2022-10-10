@@ -96,7 +96,7 @@ Dynamic Polymorphism is this when functions are defined using the keyword
 virtual.
 
 ### example of dynaimic polymorphism
-![dynamicP](https://imgur.com/a/amLSDju)
+![dynamic](https://imgur.com/a/amLSDju)
 
 
 
