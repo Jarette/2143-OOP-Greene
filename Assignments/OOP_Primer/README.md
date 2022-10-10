@@ -156,7 +156,8 @@ private:
 
 ## Methods
 
-a method is a procedure(function) that is defined in a class and can be accessed by a class to change the attributes of the class.
+a method is a procedure(function) that is defined in a class and can be 
+accessed by a class to change the attributes of the class.
 
 ```
 class Myclass{
@@ -165,6 +166,40 @@ public:
     void setage(a);
 };
 ```
+
+## Class variable
+
+A class variable is a variable that is defined in a class and only a 
+single instance of this variable is created no matter how many instances 
+of the class is created. This is done by using the static keyword
+
+### example of class variables:
+
+```
+class Myclass{
+private:
+    static int a = 0;
+    int b; 
+
+};
+```
+
+## Instance Variables
+
+Instance variables are variables that are defined with every instance of 
+an object being created.
+
+### example of instance variables
+
+```
+class Myclass{
+private:
+    int a;
+    int b;
+    int c;
+};
+```
+
 
 
 
