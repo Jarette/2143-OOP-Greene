@@ -97,7 +97,7 @@ virtual.
 
 ### example of dynaimic polymorphism
 
-![virtual](https://namangupta01.medium.com/virtual-function-in-java-vs-c-d75874d23/assets/images/1_opiixjYf05Y8GE9buOxDZw.png)
+![virtual](https://miro.medium.com/max/1300/1*4ioFiXqE2ddWgKWVpc_F5Q.png)
 
 
 
