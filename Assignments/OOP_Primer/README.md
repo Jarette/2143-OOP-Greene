@@ -66,6 +66,41 @@ to create a class using the attribute and methods of another class.
         return 0;
     }
 ```
+** Output **
+```
+    Derived Function
+```
+
+## Polymorphism
+
+Polymorphsim is the ability of different functions can be called using 
+the same name. There are two main forms of polymorphism:
+
+### Static Polymorphism
+
+Static Polymorphism is the case of where two functions having the same 
+name but the different parameters. this also known as overloading 
+functions
+
+### example of static polymorphism:
+
+```
+void display(int);
+void display(float);
+void display(int, float);
+```
+
+### Dynamic Polymorphism
+
+Dynamic Polymorphism is this when functions are defined using the keyword 
+virtual.
+
+### example of dynaimic polymorphism
+![dynamicP](virtual-functions-6fbbb2c1db6e.html)
+
+
+
+
 
 
 
