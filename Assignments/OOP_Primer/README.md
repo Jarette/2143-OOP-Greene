@@ -121,7 +121,7 @@ private:
 
 public:
     int getage();
-    void setage();
+    void setage(a);
 };
 ```
 
@@ -138,7 +138,34 @@ Myclass class2
 class1.getage();
 ```
 
-## 
+## Attributes / Properties 
+
+Attributes are the changeable characteristics of a component of a 
+program. Classes have their own attributes that can only be changed 
+within the class.
+
+### examples of attributes:
+
+```
+class Myclass{
+private: 
+    int name;
+    int age;
+ };
+```
+
+## Methods
+
+a method is a procedure(function) that is defined in a class and can be accessed by a class to change the attributes of the class.
+
+```
+class Myclass{
+public:
+    int getage();
+    void setage(a);
+};
+```
+
 
 
 
