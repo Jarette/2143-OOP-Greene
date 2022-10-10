@@ -1,5 +1,9 @@
 # OOP Terminology
 
+## Object Oriented Programming
+
+Object Oriented Programming (OOP) is a computer programming model that organizes its process in objects through classes that are created by grouping attributes and methods together
+
 ## Abstraction
 
 Abstraction is a fundamental concept of computer science but also a key 
@@ -99,6 +103,42 @@ virtual.
 
 ![virtual](https://miro.medium.com/max/1300/1*4ioFiXqE2ddWgKWVpc_F5Q.png)
 
+## Class
+
+A class is considered a blue print for a data type. this blue print is 
+what is used to create an object can do. This is becasue in the 
+definition of this class is where there are all the attributes and 
+methods that the class will have access too.
+
+### example of a class
+
+```
+class Myclass{
+private:
+
+    int name
+    int age
+
+public:
+    int getage();
+    void setage();
+};
+```
+
+## Object
+
+An object is created from a class and this object has access to methods 
+and attributes in the public section of a class
+
+### example of an object
+```
+Myclass class1
+Myclass class2
+
+class1.getage();
+```
+
+## 
 
 
 
