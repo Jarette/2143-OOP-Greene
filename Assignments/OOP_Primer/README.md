@@ -2,7 +2,11 @@
 
 ## Object Oriented Programming
 
-Object Oriented Programming (OOP) is a computer programming model that organizes its process in objects through classes that are created by grouping attributes and methods together
+Object Oriented Programming (OOP) is a computer programming model that 
+organizes its process in objects through classes that are created by 
+grouping attributes and methods together
+
+![oop](https://miro.medium.com/max/600/0*7zMicw-FfThCbN35.png)
 
 ## Abstraction
 
