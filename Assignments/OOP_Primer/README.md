@@ -74,6 +74,55 @@ to create a class using the attribute and methods of another class.
 ```
     Derived Function
 ```
+## Multiple Inheritance
+
+There are many types of inheritance one of which is Multiple inheritance 
+This is when a class derives from one of more parent class.
+
+### Example of Multiple Inheritance
+
+'''
+class A{
+ // class methods and attributes
+};
+class B{
+ // class methods and attributes
+};
+Class C: public A, public B{
+ // class derived from both A and B
+};
+
+## Composition
+
+Composition is similar to inheritance where it allows another class to 
+use the attributes and methods of another class but achieves this 
+differently. Composition is achieved by creating an instance of a class 
+as an attribute of another class. 
+
+### Example  of Composition
+'''
+class A{
+public:
+    void print(){
+        cout << "printed";
+    }
+    };
+class B{
+ private:
+    A A1;
+public:
+    B(){
+        A1.print();
+    }
+    };
+    int main() {
+    B B1;
+}
+'''
+Output
+'''
+printed
+'''
 
 ## Polymorphism
 
@@ -84,7 +133,8 @@ the same name. There are two main forms of polymorphism:
 
 Static Polymorphism is the case of where two functions having the same 
 name but the different parameters. this also known as overloading 
-functions
+functions. This is also reffered to as the Overloading and this can be 
+done to operators 
 
 ### example of static polymorphism:
 
@@ -256,7 +306,7 @@ be able change an of the data located under this heading.
 
 ### Protected
 
-Protected is Similar to private but allows access to classes that are derived from the original class but not objects that are created from 
+Protected is similar to private but allows access to classes that are derived from the original class but not objects that are created from 
 the class
 
 ### Public 
@@ -283,7 +333,7 @@ Public:
 
 ## Friend
 
-The Friend keyword allows for classes to have access to functions that are not defined outside of the class
+The Friend keyword allows for classes to have access to functions that are not defined outside of the class.
 
 ### example of using the Friend keyword
 
@@ -300,3 +350,88 @@ void print(){
 }
 ```
 
+## Methods
+
+These are functions that are apart of a class. These functions can be 
+called by the object if in public using the dot (.) or -> operator.
+
+### example of  a method
+
+'''
+class A{
+public:
+    void print(){
+        cout << "print";
+    }
+};
+
+int main(){
+
+    A A1
+
+    A1.print();
+}
+'''
+Output
+'''
+print
+'''
+
+## Static Keyword
+
+The static keyword caused what is created using it to be stored on the 
+heap which means that it hold its values in memory until the program ends 
+and even outside of itsscope similarly to declaring a global variable.The 
+static keyword can be added to variable in functions, class objects,
+member variables in class, and methds in class. 
+
+### example of static keyword
+'''
+void counter(){
+    static int count=0;
+    cout << count++;
+     }
+int main(){
+    for(int i=0;i<5;i++){
+        counter();
+    }  
+}
+'''
+Output
+'''
+0 1 2 3 4
+'''
+
+## Virtual Keyword
+
+This virtual keyword is used to tell the compiler that a function in a 
+base class can be overwritten by a function in a derived class. The 
+virtual is only neccesary if the class calling the function is created
+as a pointer  
+
+### example of virtual keyword 
+
+'''
+class Base {
+public:
+   virtual void print() {
+    // code
+    }
+};
+class Derived : public Base {
+public:
+    void print() {
+    // code
+    }
+};
+int main() {
+
+    Derived derived1;
+    Base* base1 = &derived1;
+
+    // calls function of Base class
+
+    base1->print();
+    return 0; 
+}
+'''
