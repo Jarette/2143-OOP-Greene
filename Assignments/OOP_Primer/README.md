@@ -357,25 +357,24 @@ called by the object if in public using the dot (.) or -> operator.
 
 ### example of  a method
 
-'''
+```
 class A{
 public:
     void print(){
         cout << "print";
     }
 };
-
 int main(){
 
     A A1
 
     A1.print();
 }
-'''
+```
 Output
-'''
+```
 print
-'''
+```
 
 ## Static Keyword
 
@@ -386,7 +385,9 @@ static keyword can be added to variable in functions, class objects,
 member variables in class, and methds in class. 
 
 ### example of static keyword
-'''
+
+```
+
 void counter(){
     static int count=0;
     cout << count++;
@@ -396,11 +397,12 @@ int main(){
         counter();
     }  
 }
-'''
+
+```
 Output
-'''
+```
 0 1 2 3 4
-'''
+```
 
 ## Virtual Keyword
 
@@ -411,7 +413,7 @@ as a pointer
 
 ### example of virtual keyword 
 
-'''
+```
 class Base {
 public:
    virtual void print() {
@@ -434,4 +436,4 @@ int main() {
     base1->print();
     return 0; 
 }
-'''
+```
