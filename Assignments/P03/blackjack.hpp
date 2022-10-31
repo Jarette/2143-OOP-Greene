@@ -1,3 +1,4 @@
+// neccesary libraries
 #include "colors.h"
 #include <algorithm> // std::random_shuffle
 #include <fstream>
@@ -10,10 +11,23 @@
 #include <stdio.h>
 
 using namespace std;
+/**
+	* Public : doubleline
+	*
+	* Description:
+	*      adds two blank lines to the code
+	*
+	* Params:
+	*      N/A
+	*
+	* Returns:
+	*      N/A
+	*/
 void doubleline(){
   cout << endl;
   cout <<endl;
 }
+//declaring varibales
 const string spade = "♠";
 const string diamond = "♦";
 const string heart = "♥";
@@ -30,15 +44,32 @@ string Purple = "5";
 string Cyan = "6";
 string White = "7";
 string Default = "9";
-
+/**
+ * Public printColor
+ * 
+ * Description: 
+ *   to display a string with a fore and background color
+ * 
+ * Params
+ *    string    out: the string that will be given the color
+ *    int       fg: integer to indicate the foreground color
+ *    int       bg: interfer to indicate the background color
+ * 
+ * Returns:
+ *    N/A
+ */
 void printColor(string out, int fg, int bg = 9) {
 	cout << "\033[0;3" << fg << ";4" << bg << "m" << out << "\033[0;39;49m";
 }
 
-// Card labels (could be "Iron Man" or "Charmander" or "Elf" ... anything)
+// Card labels
 const string ranks[13] =
 	{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
+
+// declaring classes like prototypes
+class CardContainer;
+class Hand;
 /*
    ____    _    ____  ____
   / ___|  / \  |  _ \|  _ \
@@ -47,10 +78,56 @@ const string ranks[13] =
   \____/_/   \_\_| \_\____/
 
 */
-
-class CardContainer;
-class Hand;
-
+/**
+ * Card
+ * 
+ * Description: 
+ *    This Class is uses uni code to create a visual representation of a
+ *    normal playing card with a custom for and background colors and 
+ *    also contains overloaded operators that allows the card to function
+ *    similarly to cards in real life
+ * 
+ * Public Methods
+ *                          Card()
+ *                          Card(int)
+ *                          string Repr() *not implemented*
+ *    bool                  operator < (const Card&)
+ *    bool                  operator > (const Card&)
+ *    bool                  operator == (const Card&)
+ *    bool                  operator != (const Card&) 
+ *    friend                Hand *Hand implemented but not used*
+ *    friend ostream        &operator <<(ostream &os, const Card &card)
+ *    friend Class          CardContainer
+ *    int                   getRank()
+ *    string                getRankChar()
+ *    string                getSuitChar()
+ *    string                getfColor()
+ *    string                getbColor()
+ * 
+ * Protected Methods:
+ *    
+ *     int                  suitNum
+ *     int                  rank
+ *     int                  number
+ *     int                  value
+ *     string               suitChar
+ *     string               rankChar
+ *     string               fcolor
+ *     string               bcolor
+ * 
+ * Usage:
+ *    
+ *     Card C;                //creates a blank card
+ *     Card C2(4);            //creates a card with color suit and rank based on the integer passed
+ *     C < C1;                // using bool operators to check if C is less than C1
+ *     C > C1;                // using bool operators to check if C is greater than C1
+ *     C == C!;               // using bool operators to check if C and C1 are equal 
+ *     cout << C;             // using ostream ooperator to print a card
+ *     C.getRank();           // returns the rank of the card
+ *     C.getSuitChar();       // returns the suit character of the card
+ *     C.getfColor();         // returns the foreground color of the card
+ *     C.getbColor();        //returns the background color of the card
+*/  
 class Card {
 protected:
 	int suitNum;	 // value 0-3 : num index of suit
@@ -73,19 +150,80 @@ public:
 	bool operator!=(const Card &);
 
 	friend ostream &operator<<(ostream &os, const Card &card);
+  // gives the CardContainer class access to the Methods of the Card Class
 	friend class CardContainer;
+  /**
+ * Public : getRank
+ *
+ * Description:
+ *     A Function that returns the rank of a card
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      int     the numerical rank of a card (the value)
+ */
 	int getRank() {
 		return rank;
 	}
+  /**
+ * Public : getRankChar
+ *
+ * Description:
+ *     A Function that returns the character that represents the card's rank
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string     the character representation of the rank of a card (the value)
+ */
 	string getRankChar() {
 		return rankChar;
 	}
+ /**
+ * Public : getSuitChar
+ *
+ * Description:
+ *     A Function that returns the suit of a card
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string     the character that respresents the suit of the card
+ */
 	string getSuitChar() {
 		return suitChar;
 	}
+/**
+ * Public : getfColor
+ *
+ * Description:
+ *     A Function that returns the foreground color of a card 
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string     the color used for the foreground of the card
+ */
 	string getfColor() {
 		return fcolor;
 	}
+/**
+ * Public : getbColor
+ *
+ * Description:
+ *     A Function that returns the background color of a card 
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string     the color used for the background of the card
+ */
 	string getbColor() {
 		return bcolor;
 	}
@@ -122,7 +260,18 @@ ostream &operator<<(ostream &os, const Card &card) {
 
 	return os;
 }
-
+/**
+ * Public : PrintCard
+ *
+ * Description:
+ *      function that is used to print a card
+ *
+ * Params:
+ *      [Card*]     : obj
+ *
+ * Returns:
+ *      string      a string that contains a card
+ */
 string PrintCard(Card *card) {
 	string c = "";
 	c += "\033[0;3" + card->getfColor() + ";4" + card->getbColor() + "m";
@@ -138,7 +287,19 @@ string PrintCard(Card *card) {
 
 	return c;
 }
-
+/**
+ * Public : Card
+ *
+ * Description:
+ *      This is a constructor that creates a single blank card
+ *      of no value
+ *
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      N/A
+ */
 Card::Card() {
 	// fcolor = to_string(1+ rand() % 7);
 	fcolor = to_string(0);
@@ -169,19 +330,67 @@ Card::Card(int num) {
 	rank = number % 13;
 	rankChar = ranks[rank];
 }
-
+/**
+ * Public : operator <
+ *
+ * Description:
+ *      Overloaded bool operator that allows you to compare the value of two cards to 
+ *      see if the value of the card of the left is less than the one on the right
+ *
+ * Params:
+ *      [Card]     : obj
+ *
+ * Returns:
+ *      [bool]
+ */
 bool Card::operator<(const Card &rhs) {
 	return this->rank < rhs.rank;
 }
-
+/**
+ * Public : operator >
+ *
+ * Description:
+ *      Overloaded bool operator that allows you to compare the value of two cards to 
+ *      see if the value of the card of the left is greater than the one on the right
+ *
+ * Params:
+ *      [Card]     : obj
+ *
+ * Returns:
+ *      [bool]
+ */
 bool Card::operator>(const Card &rhs) {
 	return this->rank > rhs.rank;
 }
-
+/**
+ * Public : operator ==
+ *
+ * Description:
+ *      Overloaded bool operator that allows you to compare the value of two cards to 
+ *      see if the value of the card of the left is equal the one on the right
+ *
+ * Params:
+ *      [Card]     : obj
+ *
+ * Returns:
+ *      [bool]
+ */
 bool Card::operator==(const Card &rhs) {
 	return this->rank == rhs.rank;
 }
-
+/**
+ * Public : operator !=
+ *
+ * Description:
+ *      Overloaded bool operator that allows you to compare the value of two cards to 
+ *      see if the value of the card of the left is not equal the one on the right
+ *
+ * Params:
+ *      [Card]     : obj
+ *
+ * Returns:
+ *      [bool]
+ */
 bool Card::operator!=(const Card &rhs) {
 	return this->rank != rhs.rank;
 }
@@ -193,7 +402,42 @@ bool Card::operator!=(const Card &rhs) {
  | |___ / ___ \|  _ <| |_| | |__| |_| | |\  | | |/ ___ \ | || |\  | |___|  _ <
   \____/_/   \_\_| \_\____/ \____\___/|_| \_| |_/_/   \_\___|_| \_|_____|_| \_\
 */
-
+/**
+ * Card Containter
+ * 
+ * Description: 
+ *    This is a Class that is design to hold a vector of Card pointers and perform 
+ *    various operations unto this set of cards. This class also has access to the 
+ *    methods used in the Cards Class
+ *    
+ * Public Methods:
+ *                                    CardContainer(); *not implemented*
+ *                                    CardContainer(int);*not implemented*
+ *    void                            Add(Card*);
+ *    bool                            isEmpty(); *not implemented*   
+ *    void                            Order();   *not implemented
+ *    void                            Remove();
+ *    void                            Shuffle(); *not implemented*
+ *    int                             Size()
+ *    vector<Card *> :: iterator      Next();
+ *    friend ostream                  &operator << (ostream &os, const CardContainer&cards)
+ *    Card&                           operator [](int);
+ * 
+ * Protected Methods:
+ *    vector <Card *>                 Cards;  a vector of cards
+ *    vector <Card *>::interator      it;     an interator that traverses the cards
+ *  
+ * 
+ * Usage:
+ * 
+ *    CardContainer CC1               // creates an instance of a card container
+ *    CC1.Add(&Card)                  // accepts the address of a card and adds it to the container
+ *    CC1.Remove()                    // removes the first card in the container
+ *    CC1.Reset()                     // removes all cards from the container
+ *    CC1.Size()                      // returns the number of cards in the container
+ *    cout << CC1                     // displays all the cards in the container 
+ *    CC1[0]                          // allow for access to card in container similarly to a 
+*/  
 class CardContainer {
 protected:
 	vector<Card *> Cards;
