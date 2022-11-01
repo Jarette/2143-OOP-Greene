@@ -411,16 +411,16 @@ bool Card::operator!=(const Card &rhs) {
  *    methods used in the Cards Class
  *    
  * Public Methods:
- *                                    CardContainer(); *not implemented*
+ *                                    CardContainer(); 
  *                                    CardContainer(int);*not implemented*
  *    void                            Add(Card*);
  *    bool                            isEmpty(); *not implemented*   
  *    void                            Order();   *not implemented
  *    void                            Remove();
  *    void                            Shuffle(); *not implemented*
- *    int                             Size()
- *    vector<Card *> :: iterator      Next();
- *    friend ostream                  &operator << (ostream &os, const CardContainer&cards)
+ *    int                             Size();
+ *    vector<Card *> :: iterator      Next(); 
+ *    friend ostream                  &operator << (ostream &os, const CardContainer&cards);
  *    Card&                           operator [](int);
  * 
  * Protected Methods:
@@ -436,7 +436,7 @@ bool Card::operator!=(const Card &rhs) {
  *    CC1.Reset()                     // removes all cards from the container
  *    CC1.Size()                      // returns the number of cards in the container
  *    cout << CC1                     // displays all the cards in the container 
- *    CC1[0]                          // allow for access to card in container similarly to a 
+ *    CC1[0]                          // allow for access to card in container similarly to an array
 */  
 class CardContainer {
 protected:
@@ -453,6 +453,17 @@ public:
   void Remove();
 	void Reset();
 	void Shuffle();
+  /**
+ * Public : Size
+ *
+ * Description:
+ *      returns the amount of card held in the container
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      int     the number of cards in the container
+ */
 	int Size(){
     return Cards.size();
   };
@@ -460,7 +471,20 @@ public:
 	friend ostream &operator<<(ostream &os, const CardContainer &cards);
   Card& operator[](int);
 };
-
+/**
+ * Public : operator <<
+ *
+ * Description:
+ *      Overloading ostream to that it traverses the vector of cards and 
+ *      displays all cards in thier approipriate order 
+ *
+ * Params:
+ *      [ostream&] : os
+ *      [CardContainer]     : obj
+ *
+ * Returns:
+ *      [ostream&]
+ */
 ostream &operator<<(ostream &os, const CardContainer &c) {
 	for (int i = 0; i < c.Cards.size(); i++) {
 		os << "\033[0;3" << c.Cards[i]->getfColor() << ";4"
@@ -491,21 +515,67 @@ ostream &operator<<(ostream &os, const CardContainer &c) {
 
 	return os;
 }
-
+ /**
+ * Public : Card
+ *
+ * Description:
+ *      Default Constructor that initializes the iterator of the card container
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 CardContainer::CardContainer() {
 	it = Cards.begin();
 }
-
+/**
+ * Public : Add
+ *
+ * Description:
+ *      Method that pushes a new card point on the back of the card container vector
+ * 
+ * Params:
+ *     Card     *C : A card pointer
+ * 
+ * Returns:
+ *      N/A
+ */
 void CardContainer::Add(Card *C) {
 	Cards.push_back(C);
 }
-
+/**
+ * Public : Next
+ *
+ * Description:
+ *      Method that moves the iterator forward to the card after the current card
+ * 
+ * Params:
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 vector<Card *>::iterator CardContainer::Next() {
 	if (it == Cards.end()) {
 		it = Cards.begin();
 	}
 	return it++;
 }
+/**
+ * Public : operator[]
+ *
+ * Description:
+ *     Overloaded the [] operators so that the user can access the cards in the vector 
+ *     similarly to the how items are accessed in an array
+ * 
+ * Params:
+ *     int      index : this is the index of the card 
+ * 
+ * Returns:
+ *      Card&     returns the address of a card
+ */
  Card& CardContainer:: operator[](int index){
    // because the if part returns nothing   
    if(index > Cards.size()){
@@ -518,9 +588,33 @@ vector<Card *>::iterator CardContainer::Next() {
      return *Cards[index];
    }
  }
+ /**
+ * Public : Remove
+ *
+ * Description:
+ *      This methods is used to remove the card that is at the front of the container
+ * 
+ * Params:
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 void CardContainer:: Remove(){
   Cards.erase(Cards.begin());
 }
+/**
+ * Public : Reset
+ *
+ * Description:
+ *      This method empty the container
+ * 
+ * Params:
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 void CardContainer::Reset(){
   Cards.erase(Cards.begin(),Cards.begin()+Cards.size());
 }
@@ -533,7 +627,35 @@ void CardContainer::Reset(){
  | |_| | |__| |___| . \
  |____/|_____\____|_|\_\
 */
-
+/**
+ * Deck : Public Container
+ * 
+ * Description: 
+ *    This is a class to represent the deck of a card and has all the methods and 
+ *    uses that you would expect of a deck of cards. This Class is also derived from
+ *    the card container class so it has access to all of card container class 
+ *    methods 
+ *    
+ * Public Methods:
+ *                            Deck();
+ *                            Deck(int);
+ *     Card                   *Draw(); *not implemented*
+ *     friend ostream         &operator << (ostream &os, Deck &cards);
+ *     int                    getdecksize(); 
+ *     void                   randomInsert(Card *C);
+ *     
+ * Protected Methods:
+ * 
+ *     int                    deckSize : This is the amount of cards in the deck 
+ * 
+ * Usage:
+ *     Deck D1;                // creates a shuffle deck of default size of 52
+ *     Deck D2(2);             // creates a shuffled deck of size 2*52
+ *     cout << D1;             // displays all the cards in the deck 
+ *     D1.getdecksize         // returns the amount of cards in the deck
+ *     D1.randomInsert        // places card in a random position in the deck
+ *     D1.Add(&Card)          // Deck having access to methods of card container 
+*/  
 class Deck : public CardContainer {
 protected:
 	int deckSize;
@@ -542,21 +664,73 @@ public:
 	Deck();
 	Deck(int);
 	Card *Draw();
+  /**
+ * Public : operator <<
+ *
+ * Description:
+ *      Overloading ostream to that it traverses the vector of cards and 
+ *      displays all cards in thier approipriate order 
+ *
+ * Params:
+ *      [ostream&] : os
+ *      [Deck]     : obj
+ *
+ * Returns:
+ *      [ostream&]
+ */
 	friend ostream &operator<<(ostream &os, Deck &cards) {
 		for (int i = 0; i < cards.deckSize+1; i++) {
 			os << PrintCard(*cards.Next());
 		}
 		return os;
 	}
+/**
+ * Public : getdecksize
+ *
+ * Description:
+ *      This method returns the number of cards in the deck 
+ * 
+ * Params:
+ *     N/A
+ * 
+ * Returns:
+ *      int         returns the number of cards in the deck 
+ */
   int getdecksize(){
     return deckSize;
   }
+/**
+ * Public : randomInsert
+ *
+ * Description:
+ *      This method places a random card in a random position in the the deck 
+ * 
+ * Params:
+ * 
+ *     Card       *C : this is the card to be inserted 
+ * 
+ * Returns:
+ *      N/A
+ */
   void randomInsert(Card * C){
     Cards.insert(Cards.begin()+((rand() % deckSize+1)+1),C);
   }
     
 };
-
+/**
+ * Public : Deck
+ *
+ * Description:
+ *      This is a Default constructor that creates a deck of size 52 and shuffles
+ *      the contents 
+ * 
+ * Params:
+ * 
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 Deck::Deck() {
 	deckSize = 52;
 	for (int i = 0; i < deckSize+1; i++) {
@@ -564,6 +738,20 @@ Deck::Deck() {
 	}
   random_shuffle(Cards.begin(),Cards.end());
 }
+/**
+ * Public : Deck
+ *
+ * Description:
+ *      This is a Default constructor that creates a deck of size a*52 and shuffles
+ *      the contents 
+ * 
+ * Params:
+ * 
+ *     int      a: this in is multiplied by 52 to get the size of the deck 
+ * 
+ * Returns:
+ *      N/A
+ */
 Deck :: Deck(int a){
   deckSize = a*52;
 	for (int i = 0; i < deckSize+1; i++) {
