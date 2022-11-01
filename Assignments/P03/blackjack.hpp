@@ -1,3 +1,25 @@
+/*****************************************************************************
+*
+*  Author:           Jarette Greene
+*  Email:            jarettegreene09@gmail.com
+*  Label:            P03
+*  Title:            BlackJack 
+*  Course:           CMPS 2143
+*  Semester:         Fall 2022
+*
+*  Description:
+*		  This is an hpp file that contains all of the neccessasry classes and functiosn
+*     to create the game blackjack
+*
+*  Usage:
+*        N/A
+*
+*  Files:
+*			main.cpp				:driver program
+*			blackjack.hpp   :contains all classes anf functions neccessary
+*     color.h         :contains all the color codes for the cards 
+*
+*****************************************************************************/
 // neccesary libraries
 #include "colors.h"
 #include <algorithm> // std::random_shuffle
@@ -7,7 +29,7 @@
 #include <string>
 #include <time.h>
 #include <vector>
-#include <unistd.h>
+#include <unistd.h> //makesure to un comment this before running. This was just commented to remove an error in vscode
 #include <stdio.h>
 
 using namespace std;
@@ -760,33 +782,53 @@ Deck :: Deck(int a){
   random_shuffle(Cards.begin(),Cards.end());
 }
 /**
- * Deck : Public Container
+ * Player : public Cardcontainer
  * 
  * Description: 
- *    This is a class to represent the deck of a card and has all the methods and 
- *    uses that you would expect of a deck of cards. This Class is also derived from
- *    the card container class so it has access to all of card container class 
- *    methods 
+ *    This is a Class to represent the player of the blackjack game and all
+ *    different this that a player would have access to when playing blackjack.
+ *    This class is also derived from the Card Container class so has access to
+ *    all its functions and  methods of a Card Container
  *    
  * Public Methods:
- *                            Deck();
- *                            Deck(int);
- *     Card                   *Draw(); *not implemented*
- *     friend ostream         &operator << (ostream &os, Deck &cards);
- *     int                    getdecksize(); 
- *     void                   randomInsert(Card *C);
+ *                       
+ *                      Player();
+ *                      Player(string n, int a, int b);
+ *    string            getname();
+ *    int               getage();
+ *    int               getbank();
+ *    void              setbank(int b);
+ *    void              add_to_hand(Deck &D1);
+ *    void              showhand();
+ *    void              showparthand(int index);
+ *    int               getcardrank(int index);
+ *    int               gethadsize();
+ *    void              emptyhand();
  *     
  * Protected Methods:
  * 
- *     int                    deckSize : This is the amount of cards in the deck 
+ *    CardContainer     hand; : this is the players hand
+ * 
+ * Private  Methods: 
+ * 
+ *    string            name;  : the name of the player
+ *    int               age;   : the age of the player 
+ *    int               bank;  : the bank of the player
  * 
  * Usage:
- *     Deck D1;                // creates a shuffle deck of default size of 52
- *     Deck D2(2);             // creates a shuffled deck of size 2*52
- *     cout << D1;             // displays all the cards in the deck 
- *     D1.getdecksize         // returns the amount of cards in the deck
- *     D1.randomInsert        // places card in a random position in the deck
- *     D1.Add(&Card)          // Deck having access to methods of card container 
+ *     
+ *    Player P1;                  // Uses default parameters to create Player
+ *    Player P2("Bob",21,1000);    // uses passed parameters to initialize Player
+ *    P1.getname();               // returns the player name
+ *    P1.getage();                // return age of player
+ *    P1.getbank();               // return the bank amount
+ *    P1.setbank();               //used to change the bank amount
+ *    P1.add_to_hand(D1);          // adds a card to the players hand from the deck
+ *    P1.showhand();              // displays the whole hand of the player
+ *    P1.showparthand(0);         // shows the first card in the hand 
+ *    P1.getcardrank(0);          // gets the rank of the card in the first card
+ *    P1.gethandsize();           // get the amount of cards in the players hands
+ *    P1.emptyhand();             // empties the hand of the player                
 */  
 class Player : public CardContainer {
 private:
@@ -798,73 +840,387 @@ protected:
 	CardContainer hand;
 
 public:
+/**
+ * Public : Player
+ *
+ * Description:
+ * 
+ *      This is a Default constructor that uses default parameters to create an instance of 
+ *      a Player
+ * 
+ * Params:
+ * 
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+ */
 	Player() {
 		name = "Jarette";
 		age = 23;
 		bank = 20000;
 	}
+/**
+ * Public : Player
+ *
+ * Description:
+ * 
+ *      This is a Default constructor that uses default parameters to create an instance of 
+ *      a Player
+ * 
+ * Params:
+ * 
+ *     string     n: represents the name of the player
+ *     int        a: represents the age of the player
+ *     int        b: represents the bank of the player
+ * 
+ * Returns:
+ *      N/A
+ */
 	Player(string n, int a, int b) {
 		name = n;
 		age = a;
 		bank = b;
 	}
+  /**
+ * Public : getname
+ *
+ * Description:
+ * 
+ *      This is a method that returns the name of the player
+ * 
+ * Params:
+ * 
+ *     N/A
+ * 
+ * Returns:
+ *      string        the name of the player
+ */
   string getname(){
     return name;
   }
+  /**
+ * Public : getage
+ *
+ * Description:
+ * 
+ *      This is a method that returns the age of the player
+ * 
+ * Params:
+ * 
+ *     N/A
+ * 
+ * Returns:
+ *      int        the age of the player
+ */
   int getage(){
     return age;
   }
+/**
+ * Public : getbank
+ *
+ * Description:
+ * 
+ *      This is a method that returns the bank of the player
+ * 
+ * Params:
+ * 
+ *     N/A
+ * 
+ * Returns:
+ *      int        the bank of the player
+ */
   int getbank(){
     return bank;
   }
+/**
+ * Public : set
+ *
+ * Description:
+ * 
+ *      This is a method that allows you to set a new value for the bank
+ * 
+ * Params:
+ * 
+ *     int      b: the new value of bank 
+ * 
+ * Returns:
+ *     N/A
+ */
   void setbank(int b){
     bank = b;
   }
+/**
+ * Public : add_to_hand
+ *
+ * Description:
+ * 
+ *      This is a function that adds a card to the hand then removes a card from the deck 
+ *      and inserts a random card into the deck.
+ * 
+ * Params:
+ * 
+ *     Deck      &D1: the deck used to play the game
+ * 
+ * Returns:
+ *     N/A
+ */
 	void add_to_hand(Deck &D1) {
 		hand.Add(&D1[0]);
 		D1.Remove();
     D1.Add(new Card(rand() % 52));
 	}
+  /**
+ * Public : showhand
+ *
+ * Description:
+ * 
+ *      This is a function that displays the entire hand of the player
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     N/A
+ */
 	void showhand() {
     cout << endl;
 		cout << hand;
 		cout << endl;
 	}
+   /**
+ * Public : showparthand
+ *
+ * Description:
+ * 
+ *      This is a function gives access to the specific card in the players hand 
+ * 
+ * Params:
+ * 
+ *    int     index: used to get the card location
+ * 
+ * Returns:
+ *     N/A
+ */
 	void showparthand(int index) {
 		cout << hand[index];
 	}
+/**
+ * Public : getcardrank
+ *
+ * Description:
+ * 
+ *      this function allows the player get the rank (value) of a specified card
+ * 
+ * Params:
+ * 
+ *    int     index: used to get the card location
+ * 
+ * Returns:
+ *    int     the rank of the card
+ */
 	int getcardrank(int index) {
 		return hand[index].getRank();
 	}
+  /**
+ * Public : gethandsize
+ *
+ * Description:
+ * 
+ *      this function returns the size of the players hand 
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     int    the size of the hand 
+ */
 	int gethandsize() {
 		return hand.Size();
 	}
+/**
+ * Public : emptyhand
+ *
+ * Description:
+ * 
+ *      this function removes all cards from the player's hands 
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     N/A
+ */
   void emptyhand(){
     hand.Reset();
   }
 };
+/**
+ * Dealer : public Player
+ * 
+ * Description: 
+ * 
+ *    This is a class that represents the dealer of the blackjack game. This class is 
+ *    derived from the Player class
+ *    
+ * Public Methods:
+ * 
+ *                          Dealer
+ *    string                getDname;
+ *                   
+ * Private  Methods: 
+ * 
+ *    string                Dname; : the dealers name
+ * 
+ * 
+ * Usage:
+ *     
+ *    Dealer House               //initializing dealer class 
+ *    House.add_to_house(D1)    // uses methods from player class
+ *            
+*/  
 class Dealer : public Player{
 private:
   string Dname;
 protected:
 public:
+/**
+ * Public : Dealer
+ *
+ * Description:
+ * 
+ *      this is a default constructor to initialize the dealer class
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     N/A
+ */
  Dealer(){
    Dname ="Rich Uncle Pennybags";
  }
+ /**
+ * Public : getDname
+ *
+ * Description:
+ * 
+ *      this is a function uses to get the dealer's name
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     string     returns the name of the dealer 
+ */
 string getDname(){
   return Dname;
 }
+/*
+ 
+   /$$$$$$                                   
+  /$$__  $$                                  
+ | $$  \__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ 
+ | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$
+ | $$|_  $$  /$$$$$$$| $$ \ $$ \ $$| $$$$$$$$
+ | $$  \ $$ /$$__  $$| $$ | $$ | $$| $$_____/
+ |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$
+  \______/  \_______/|__/ |__/ |__/ \_______/
+                                             
+                                             
+                                             
+ 
+*/
 };
+/**
+ * Game
+ * 
+ * Description: 
+ *    This is a Class to represent the player of the blackjack game and all
+ *    different this that a player would have access to when playing blackjack.
+ *    This class is also derived from the Card Container class so has access to
+ *    all its functions and  methods of a Card Container
+ *    
+ * Public Methods:
+ *    void             PlayerHvalue(Player P)
+ *    void             dealerHvalue(Dealer D)
+ *    int              getplayervalue()
+ *    int              getdealervalue()
+ *    void             setplayervalue(int n)
+ *    void             setplayervalue(int n)
+ *    bool             isbust(int val)
+ *    bool             istwentyone(int val)
+ *    bool             lessthan21(int val)
+ *    void             Playerturndispaly(Player P, Dealer D, int bet)    
+ *    void             Dealerturndisplay(Player P, Dealer D, int bet)  
+ *    int              PlayerChoiceMenu()      
+ *    void             ResetGame(Player &P,Dealer &D) 
+ *    void             PlayerWon(Player &P, int bet)
+ *    void             DealerWon(Player &P, int bet)
+ *    void             Busted(Player &P, int bet)
+ *    void             LoadingMessage(string m)
+ *    void             OutofMoney() 
+ * 
+ * Protected Methods:
+ *    
+ *    int             playerhandvalue;  : the total value of the player's hand
+ *    int             dealerhandvalue;  : the total value of the dealer's hand
+ * 
+ * Usage:
+ *    
+ *    Game BLJ                                    //creating an instance of the game 
+ *    BLJ.playerHvalue / BLJ.dealerHvalue         //calculates the value of total value of the player's hand and dealer's hand value 
+ *    BLJ.getplayervalue()                   // returns the current hand value of the player
+ *    BLJ.getdealervalue()                   // returns the current hand value of the dealer
+ *    BLJ.setplayervalue(int n)               // assigns an int to the player value variable
+ *    BLJ.setdealervalue(int n)             // assigns an in to the dealer value variable 
+ *    BLJ.isbust(a)                          // checks if the value passed is over 21
+ *    BLJ.istwentyone(a)                    // checks if the value passed  is 21
+ *    BLJ.lessthan21(a)                     // checks if value passed is less than 21
+ *    BLJ.Playerturndisplay(P1,House,bet)       // displays all the elements of the game neccesary for the player's turn
+ *    BLJ.Dealerturndisplay(P1,House,bet)     // displays all elements neccessary for thr dealer's turn
+ *    BLJ.PlayerChoiceMenu()                  //displays a menu and returns the option selected
+ *    BLJ.ResetGame(P1,Hosue)               //restarts game at the end of round
+ *    BLJ.PlayerWon(P1,bet)               //performs calculations for when the player wins 
+ *    BLJ.Dealerwon(P1,bet)               // performs calculations for when the dealer wins
+ *    BLJ.Busted(P1,bet)                  // performs calculations for when the player busts
+ *    BLJ.Loading Message                 // function that flashes a message on screen for 2 seconds
+ *    BLJ.OutofMoney                      // displays a message for when the player bank is <= 0  
+ * 
+ *               
+*/  
 class Game {
 private:
 protected:
 int playerhandvalue;
 int dealerhandvalue;
 public:
+/**
+ * Public : playerHvalue
+ *
+ * Description:
+ * 
+ *    This functions adds the values of all cards in the player's hand
+ *    It also accounts for aces and allows the user to choose if the 
+ *    value of the ace is 1 or 11
+ * 
+ * Params:
+ * 
+ *    Player      P : represents the player
+ * 
+ * Returns:
+ *     N/A
+ */
 	void playerHvalue(Player P) {
 		int value = 0;
 		int temp = 0;
 		for (int i = 0; i < P.gethandsize(); i++) {
+      // checking for an ace and ask player what they would like the value to be 
 			if (P.getcardrank(i) == 0) {
 				cout << "would you like your ACE to count as 11 or a 1?:"
 					 << endl;
@@ -884,10 +1240,27 @@ public:
 		}
 		playerhandvalue = value;
 	}
+  /**
+ * Public : playerHvalue
+ *
+ * Description:
+ * 
+ *    This functions adds the values of all cards in th hand hand
+ *    It also accounts for aces by havinng the value be 1 unless the dealer
+ *    would win if the value is 11 
+ * 
+ * Params:
+ * 
+ *    Player      D : represents the dealer
+ * 
+ * Returns:
+ *    N/A
+ */
 void dealerHvalue(Dealer D){
   int value=0;
   int temp =0;
   for(int i = 0; i < D.gethandsize();i++){
+    //handling aces
     if(D.getcardrank(i)==0){
       if((value + 11) == 21){
         value = value + 11;
@@ -905,18 +1278,88 @@ void dealerHvalue(Dealer D){
   }
   dealerhandvalue = value;
 }
+/**
+ * Public : getplayervalue
+ *
+ * Description:
+ * 
+ *    This function will return the current value of the hand of the player
+ * 
+ * Params:
+ *    
+ *    N/A
+ * 
+ * Returns:
+ *     int        the value of player's hand  
+ */
   int getplayervalue(){
     return playerhandvalue;
   }
+  /**
+ * Public : getdealervalue
+ *
+ * Description:
+ * 
+ *    This function will return the current value of the hand of the dealer
+ * 
+ * Params:
+ * 
+ *    N/A
+ * 
+ * Returns:
+ *     int        the value of player's hand  
+ */
   int getdealervalue(){
     return dealerhandvalue;
   }
+    /**
+ * Public : setplayervalue
+ *
+ * Description:
+ * 
+ *    This function will set a new integer as the hand value of the player
+ * 
+ * Params:
+ * 
+ *   int         n : the new hand value
+ * 
+ * Returns:
+ *    N/A
+ */
   void setplayervalue(int n){
     playerhandvalue = n;
   }
+      /**
+ * Public : setdealervalue
+ *
+ * Description:
+ * 
+ *    This function will set a new integer as the hand value of the dealer
+ * 
+ * Params:
+ * 
+ *   int         n : the new hand value
+ * 
+ * Returns:
+ *    N/A
+ */
   void setdealervalue(int n){
     dealerhandvalue = n;
   }
+/**
+ * Public : isbust
+ *
+ * Description:
+ * 
+ *    this fucntion checks if the value passed is over 21
+ * 
+ * Params:
+ * 
+ *   int         val : the value to be checked
+ * 
+ * Returns:
+ *    bool        a true or false value 
+ */
 	bool isbust(int val) {
 		if (val > 21) {
 			return true;
@@ -924,6 +1367,20 @@ void dealerHvalue(Dealer D){
 			return false;
 		}
 	}
+  /**
+ * Public : istwentyone
+ *
+ * Description:
+ * 
+ *    this function checks if the value passed is 21
+ * 
+ * Params:
+ * 
+ *   int         val : the value to be checked
+ * 
+ * Returns:
+ *    bool        a true or false value 
+ */
 	bool istwentyone(int val) {
 		if (val == 21) {
 			return true;
@@ -931,6 +1388,20 @@ void dealerHvalue(Dealer D){
 			return false;
 		}
 	}
+/**
+ * Public : isless than
+ *
+ * Description:
+ * 
+ *    this function checks if the value passed is less than 21
+ * 
+ * Params:
+ * 
+ *   int         val : the value to be checked
+ * 
+ * Returns:
+ *    bool        a true or false value 
+ */
 	bool lessthan21(int val){
     if(val < 21){
       return true;
@@ -939,6 +1410,23 @@ void dealerHvalue(Dealer D){
       return false;
     }
   }
+/**
+ * Public : Playerturndisplay
+ *
+ * Description:
+ * 
+ *    this function displays all the information that is needed for the player on 
+ *    the player's turn
+ * 
+ * Params:
+ * 
+ *   Player       P : the player
+ *   Dealer       D : the dealer
+ *   int          bet : the current amount of money bet in that round 
+ * 
+ * Returns:
+ *    N/A
+ */
 void Playerturndispaly(Player P, Dealer D, int bet){
   cout << "DEALER: ";
   cout << endl;
@@ -970,6 +1458,23 @@ void Playerturndispaly(Player P, Dealer D, int bet){
   cout << endl;
   
 }
+/**
+ * Public : Dealerturndisplay
+ *
+ * Description:
+ * 
+ *    this function displays all the information that is needed for the player on 
+ *    the dealer's turn
+ * 
+ * Params:
+ * 
+ *   Player       P : the player
+ *   Dealer       D : the dealer
+ *   int          bet : the current amount of money bet in that round 
+ * 
+ * Returns:
+ *    N/A
+ */
 void Dealerturndisplay(Player P, Dealer D, int bet){
   cout << "DEALER: ";
   cout << endl;
@@ -1002,6 +1507,21 @@ void Dealerturndisplay(Player P, Dealer D, int bet){
   cout << "Current Hand Value: " << getplayervalue();
   cout << endl;
 }
+/**
+ * Public : PlayerMenu
+ *
+ * Description:
+ * 
+ *    displays a menu and allows the user ot choose an option and allowed the user
+ *    to pick an option
+ * 
+ * Params:
+ *      
+ *    N/A 
+ *    
+ * Returns:
+ *    int     this is the choice the player made
+ */
 int PlayerChoiceMenu(){
   int choice= 0;
   cout << endl;
@@ -1028,12 +1548,43 @@ int PlayerChoiceMenu(){
   return choice;
   }
 }
+/**
+ * Public : ResetGame
+ *
+ * Description:
+ * 
+ *    This function empties both the hand of the player and the dealer
+ * 
+ * Params:
+ *      
+ *    Player        &P  : the player
+ *    Dealer        &D  : the dealer
+ *    
+ * Returns:
+ *    N/A
+ */
 void ResetGame(Player &P,Dealer &D){
   P.emptyhand();
   D.emptyhand();
   setplayervalue(0);
   setdealervalue(0);
 }
+/**
+ * Public : PlayerWon
+ *
+ * Description:
+ * 
+ *    This function displays a message when the player wins and adds approipriate amount
+ *    to the bank
+ * 
+ * Params:
+ *      
+ *    Player        &P  : the player
+ *    Dealer        &D  : the dealer
+ *    
+ * Returns:
+ *    N/A
+ */
 void PlayerWon(Player &P, int bet){
   int winlose = 0;
   cout << "You won this round. CONGRATULATIONS";
@@ -1044,6 +1595,22 @@ void PlayerWon(Player &P, int bet){
   cout << endl;
   cout << "Your Current bank: $" << P.getbank();
 }
+/**
+ * Public : DealerWon
+ *
+ * Description:
+ * 
+ *    This function displays a message when the player loses and takes away approipriate amount
+ *    from the bank
+ * 
+ * Params:
+ *      
+ *    Player        &P  : the player
+ *    Dealer        &D  : the dealer
+ *    
+ * Returns:
+ *    N/A
+ */
 void DealerWon(Player &P, int bet){
   int winlose = 0;
    cout << "You Lost to the house. :(";
@@ -1054,6 +1621,23 @@ void DealerWon(Player &P, int bet){
    cout << endl;
    cout << "Your Current bank: $" << P   .getbank();
 }
+/**
+ * Public : Busted
+ *
+ * Description:
+ * 
+ *    This function displays a message when the player loses 
+ *    because their hand value when over 21 then subtracts approipriate amount
+ *    from the bank
+ * 
+ * Params:
+ *      
+ *    Player        &P  : the player
+ *    Dealer        &D  : the dealer
+ *    
+ * Returns:
+ *    N/A
+ */
 void Busted(Player &P, int bet){
   int winlose = 0;
   cout << "You BUSTED. :(";
@@ -1064,12 +1648,41 @@ void Busted(Player &P, int bet){
   cout << endl;
   cout << "Your Current bank: $" << P.getbank();
 }
+/**
+ * Public : LoadingMessage
+ *
+ * Description:
+ * 
+ *    This function flashes a message on screen for two seconds 
+ * 
+ * Params:
+ *      
+ *    string          m: the message
+ *    
+ * Returns:
+ *    N/A
+ */
 void LoadingMessage(string m){
   cout << m;
   cout << flush;
   sleep(2);
   system("clear");
 }
+/**
+ * Public : OutofMoney
+ *
+ * Description:
+ * 
+ *    This function displays a message on the screen to tell the player that thier 
+ *    bank is empty   
+ * 
+ * Params:
+ *      
+ *    N/A
+ *    
+ * Returns:
+ *    N/A
+ */
 void OutofMoney(){
   cout << flush;
   sleep(2);

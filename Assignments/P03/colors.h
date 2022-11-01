@@ -1,3 +1,24 @@
+
+//  Author:           Jarette Greene
+//  Email:            jarettegreene09@gmail.com
+//  Label:            P03
+//  Title:            BlackJack 
+//  Course:           CMPS 2143
+// Semester:         Fall 2022
+//
+// Description:
+//		  This is an H file that contains all data that is used to give color
+//         to components in the blackjack game
+//
+//  Usage:
+//       N/A
+//
+//  Files:
+//			main.cpp				:driver program
+//			blackjack.hpp   :contains all classes anf functions neccessary
+//    color.h         :contains all the color codes for the cards 
+//
+
 // Reset
 #define OFF "\x1b[0m"
 
