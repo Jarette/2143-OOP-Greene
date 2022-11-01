@@ -759,37 +759,35 @@ Deck :: Deck(int a){
 	}
   random_shuffle(Cards.begin(),Cards.end());
 }
-
-
-/*
-  _   _    _    _   _ ____
- | | | |  / \  | \ | |  _ \
- | |_| | / _ \ |  \| | | | |
- |  _  |/ ___ \| |\  | |_| |
- |_| |_/_/   \_\_| \_|____/
-*/
-class Hand :public CardContainer {
-protected:
-public:
-	Hand(Deck &D1){
-    Add(&D1[0]);
-    D1.Remove();
-  }
-	int Size() {
-		return Cards.size();
-	}
-	void Sort();
-  void add_to_hand(Deck &D1){
-    Add(&D1[0]);
-    D1.Remove();
-  }
-  void showhand(){
-    cout << this;
-  }
-  void showparthand(int index){
-    cout << this[index];
-  }
-};
+/**
+ * Deck : Public Container
+ * 
+ * Description: 
+ *    This is a class to represent the deck of a card and has all the methods and 
+ *    uses that you would expect of a deck of cards. This Class is also derived from
+ *    the card container class so it has access to all of card container class 
+ *    methods 
+ *    
+ * Public Methods:
+ *                            Deck();
+ *                            Deck(int);
+ *     Card                   *Draw(); *not implemented*
+ *     friend ostream         &operator << (ostream &os, Deck &cards);
+ *     int                    getdecksize(); 
+ *     void                   randomInsert(Card *C);
+ *     
+ * Protected Methods:
+ * 
+ *     int                    deckSize : This is the amount of cards in the deck 
+ * 
+ * Usage:
+ *     Deck D1;                // creates a shuffle deck of default size of 52
+ *     Deck D2(2);             // creates a shuffled deck of size 2*52
+ *     cout << D1;             // displays all the cards in the deck 
+ *     D1.getdecksize         // returns the amount of cards in the deck
+ *     D1.randomInsert        // places card in a random position in the deck
+ *     D1.Add(&Card)          // Deck having access to methods of card container 
+*/  
 class Player : public CardContainer {
 private:
 	string name;
