@@ -30,5 +30,24 @@
 
 ### Example Command
 ```
-
+//Beginning game and showing the player thier hand 
+      BlackJ.LoadingMessage("SETTING TABLE......");
+      BlackJ.Playerturndispaly(P1, House, bet);
+      cout << endl;
+      // cheecking if the player can still add to thier hand or if they still want to play 
+      while(BlackJ.lessthan21(BlackJ.getplayervalue())&& select != -1 && select != 4){
+        //asking  the player if they would like to quit, hit or stand
+        select = BlackJ.PlayerChoiceMenu();
+        cout << flush;
+        system("clear");
+        // if the player wants to hit 
+        if(select == 1){
+          P1.add_to_hand(D1);
+          BlackJ.LoadingMessage("DEALING.....");
+          BlackJ.Playerturndispaly(P1,House,bet);
+          // breaks loop if they already have a value >= 21
+          if(!BlackJ.lessthan21(BlackJ.getplayervalue())){
+            select = 4;
+            system("clear");
+          }
 ```
