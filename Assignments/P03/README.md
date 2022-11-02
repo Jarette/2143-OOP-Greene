@@ -20,9 +20,9 @@
 
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
-|   1   |[main.cpp]()| Main driver of my list program . |
-|   2   |[blackjack.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/input.dat)| Input file.|
-|   3   |[color.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P02/test.out)| output file.|
+|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/main.cpp)| Main driver of my list program . |
+|   2   |[blackjack.cpp]()| Contains all classes need to play blackjack.|
+|   3   |[color.h]()| This contains all the colors for the cards.|
 
 ### Instructions
 
