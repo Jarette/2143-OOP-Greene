@@ -48,13 +48,11 @@ using namespace std;
 
 int main() {
 	srand(time(0));
-  
   // delcaring and initializing objects and variables
   Dealer House;
   Game BlackJ;
   string pname;
   int P_age, Pbank, decknum, select = 0,bet =0, winlose = 0;
-  
   // asking player for thier name and age
   cout << "Please Enter name: ";
   cin >> pname;
