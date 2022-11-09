@@ -220,9 +220,7 @@ int main() {
     else{
       cout << endl;
     }
-      
     }
     while((P1.getbank()>0) && select != -1);
   }
-
  }
