@@ -615,11 +615,92 @@ private:
 
 protected:
 public:
+  /**
+ * Public : Player
+ *
+ * Description:
+ *        
+ *      A constructor class that gives the hand a random weapon
+ *      
+ * 
+ * Params:
+ *      
+ *      N/A
+ * 
+ * Returns:
+ * 
+ *      N/A
+ */
   Player() { hand = RandHand(); }
+ /**
+ * Public : changehand()
+ *
+ * Description:
+ *        
+ *      This methods gives a new random weapon to the player hand 
+ *      
+ * 
+ * Params:
+ *      
+ *      N/A
+ * 
+ * Returns:
+ * 
+ *      N/A
+ */
   void changehand() { hand = RandHand(); }
+ /**
+ * Public : getCname()
+ *
+ * Description:
+ *        
+ *      This methods returns the name of the weapon in the hand 
+ *      
+ * 
+ * Params:
+ *      
+ *      N/A
+ * 
+ * Returns:
+ * 
+ *      string : the name of the weapon
+ */
   string getCname() { return Hands::Names[hand]; }
+  /**
+ * Public : sethand
+ *
+ * Description:
+ *        
+ *      This method allows the player to give the hand a chosen weapon 
+ *      
+ * 
+ * Params:
+ *      
+ *      string     : the name of the weapon chosen
+ * 
+ * Returns:
+ * 
+ *      N/A
+ */
   void sethand(string a) { hand = Hands::Emojis[a]; }
 
+ /**
+ * Public : operator <<
+ *
+ * Description:
+ *        
+ *      overloaded operator to display the weapon stored in hand
+ *      
+ * 
+ * Params:
+ *      
+ *      ostream&      : the ostream operator used to display to the screen
+ *      Player        : the Player that hand will be displayed
+ * 
+ * Returns:
+ * 
+ *      ostream       : the Player's hand 
+ */
   friend ostream &operator<<(ostream &os, const Player &P) {
     return os << P.hand;
   }
@@ -673,6 +754,22 @@ private:
   string characters[5] = {"rock", "paper", "scissors", "lizard", "spock"};
 
 public:
+/**
+ * Public : RPSLS
+ *
+ * Description:
+ *        
+ *      Constructor that sets the rules of the game 
+ *      
+ * 
+ * Params:
+ *      
+ *      N/A
+ * 
+ * Returns:
+ * 
+ *     N/A
+ */
   RPSLS() {
     int rules[][5] = {{0, -1, 1, 1, -1},
                       {1, 0, -1, -1, 1},
@@ -685,6 +782,22 @@ public:
       }
     }
   }
+/**
+ * Public : gametype
+ *
+ * Description:
+ *        
+ *      method that is used to display a menu and get the user's choice 
+ *      
+ * 
+ * Params:
+ *      
+ *      N/A
+ * 
+ * Returns:
+ * 
+ *     int    the user's choice 
+ */
   int gametype() {
     int choice;
     cout << "Enter the number that corresponds with game you would like to "
@@ -702,6 +815,23 @@ public:
     }
     return choice;
   }
+  /**
+ * Public : CPU_Game_display
+ *
+ * Description:
+ *        
+ *      This method displays all neccessary information for the CPU VS CPU game
+ *      
+ * 
+ * Params:
+ *      
+ *      Player       : the first CPU player
+ *      Player       : the second CPU player
+ * 
+ * Returns:
+ * 
+ *    N/A
+ */
   void CPU_Game_display(Player P1, Player P2) {
     cout << endl;
     cout << "CPU 1 weapon: " << P1;
@@ -709,6 +839,22 @@ public:
     cout << endl;
     cout << "CPU 2 weapon: " << P2;
   }
+  /**
+ * Public : ContinueMenu
+ *
+ * Description:
+ *        
+ *      This displays a menu for the user to say if they would like to continue the game 
+ *      
+ * 
+ * Params:
+ *      
+ *    N/A
+ * 
+ * Returns:
+ * 
+ *    int  : the user's choice
+ */
   int ContinueMenu() {
     int choice;
     cout << endl;
@@ -726,6 +872,23 @@ public:
     }
     return choice;
   }
+    /**
+ * Public : PchoiceMenu
+ *
+ * Description:
+ *        
+ *      This method displays a menu for the user to choose which weapon they would like 
+ *      to to have 
+ *      
+ * 
+ * Params:
+ *      
+ *    N/A
+ * 
+ * Returns:
+ * 
+ *    string   : the weapon the player choose
+ */
   string PchoiceMenu() {
     string choice;
     cout << endl;
@@ -743,6 +906,23 @@ public:
     }
     return choice;
   }
+ /**
+ * Public : Player_game_menu
+ *
+ * Description:
+ *        
+ *      This method displays all neccessary information for the Player VS CPU game
+ *      
+ * 
+ * Params:
+ *      
+ *      Player       : the player
+ *      Player       : the CPU player
+ * 
+ * Returns:
+ * 
+ *    N/A
+ */
     void Player_game_menu(Player P1, Player P2) {
     cout << endl;
     cout << "Player 1 weapon: " << P1;
@@ -750,27 +930,55 @@ public:
     cout << endl;
     cout << "CPU  weapon: " << P2;
   }
+/**
+ * Public : getresult
+ *
+ * Description:
+ *        
+ *      This method gives the result of the battle 
+ *      
+ * 
+ * Params:
+ *      
+ *      string    : the first weapon 
+ *      string    : the second weapon 
+ * 
+ * Returns:
+ * 
+ *    int    : the result of the battle 
+ */
   int getresult(string a, string b) { return winchartmap[a][b]; }
 
 };
 
 int main() {
+
+  // declaring neccesary variables and objects 
   int choice, result;
   string Pchoice;
   RPSLS Game;
   Player CPU1;
   Player CPU2;
   Player P1;
+
+  // asking the user what type of game they would like to play 
   choice = Game.gametype();
 
 
+// the CPU vs CPU game 
   while (choice == 1) {
 
     do {
         cout << flush;
         system("clear");
+
+      // display both weapons of the CPUs
       Game.CPU_Game_display(CPU1, CPU2);
+
+      // get the result of the battle 
       result = Game.getresult(CPU1.getCname(), CPU2.getCname());
+
+      // check fot the result and display approipriate message 
       if (result == 1) {
         cout << endl;
         cout << endl;
@@ -788,6 +996,7 @@ int main() {
         sleep(4);
         system("clear");
       } else {
+        // if the battle was a tie restarts and tries again 
         cout << endl;
         cout << endl;
         cout << "Its a Tie, Restarting....";
@@ -799,24 +1008,31 @@ int main() {
         system("clear");
       }
     } while (result == 0);
+    // if the user would like to continue resets the game and start again 
     choice = Game.ContinueMenu();
     if (choice == 1) {
       CPU1.changehand();
       CPU2.changehand();
     }
   }
+
+  // this is the Player vs CPU game 
   while (choice == 2) {
       cout << flush;
   system("clear");
     cout << endl;
+    //  asking the user for thier weapon and setting the hand 
       Pchoice = Game.PchoiceMenu();
       P1.sethand(Pchoice);
     do {
          cout << flush;
         system("clear");
+        // displaying the weapons of Player and CPU and gets the result of the battle
       Game.Player_game_menu(P1,CPU1);
       cout << endl;
       result = Game.getresult(P1.getCname(), CPU1.getCname());
+
+      // displays message based on result 
       if (result == 1) {
         cout << endl;
         cout << "Player 1 wins!!";
@@ -832,6 +1048,7 @@ int main() {
         sleep(4);
         system("clear");
       } else {
+        // if the battle is a tie then ask the user for new weapon and tries again 
         cout << endl;
         cout << "Its a Tie, Restarting....";
         cout << endl;
@@ -843,6 +1060,7 @@ int main() {
         P1.sethand(Pchoice);
       }
     } while (result == 0);
+    // asking the user if they would like to continue if so restart
     choice = Game.ContinueMenu();
     if (choice == 1) {
       CPU1.changehand();
@@ -850,6 +1068,7 @@ int main() {
       choice = 2;
     }
   }
+  // when the user decides to quit 
   cout << flush;
   system("clear");
   cout << "Thank you for Playing";
