@@ -4,7 +4,7 @@
 *  Author:           Jarette Greene
 *  Email:            jarettegreene09@gmail.com
 *  Label:            P04
-*  Title:            BlackJack 
+*  Title:            Rock Paper Scissors Lizard Spock
 *  Course:           CMPS 2143
 *  Semester:         Fall 2022
 *

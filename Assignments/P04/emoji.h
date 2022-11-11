@@ -1,3 +1,23 @@
+/*****************************************************************************
+*
+*  Author:           Jarette Greene
+*  Email:            jarettegreene09@gmail.com
+*  Label:            P04
+*  Title:            Rock Paper Scissors Lizard Spock
+*  Course:           CMPS 2143
+*  Semester:         Fall 2022
+*
+*  Description:
+*		 
+*           This file contains the unicode for all the emojis that 
+*           allows the console to display the emjois to the consile
+*  Usage:
+*        N/A
+*
+*  Files:
+*			emoji.h         : this contains all the emojis needed 
+*
+*****************************************************************************/
 //https://github.com/99x/emojicpp/blob/master/emoji.h
 #include <map>
 #include <string>
