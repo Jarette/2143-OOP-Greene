@@ -13,7 +13,7 @@
 
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
-|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P04/main.cpp)| Main driver of my list program . |
+|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P04/main.cpp)| Main driver. |
 |   2   |[emoji.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P04/emoji.h)| Contains unicode emojis.|
 
 
