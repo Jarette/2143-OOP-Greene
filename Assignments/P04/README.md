@@ -5,19 +5,21 @@
      This Program is used to play the game Rock Paper Scissors Lizard Spock from the popular 
      TV show Big Bang Theory. This uses a randomizer functions, maps to determine the winner 
      and unicode emojis to display the different weapon/selection that the user or the Compiler
-     can use. 
+     can use. This program as two modes, a CPU vs CPU where the compiler generates two random 
+     weapons and pits them against each other and Player vs CPU where the user can choose a weapon 
+     then go against a random weapon chosen by the compiler 
 
 ### Files
 
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
 |   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/main.cpp)| Main driver of my list program . |
-|   2   |[blackjack.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/blackjack.hpp)| Contains all classes need to play blackjack.|
-|   3   |[color.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/color.h)| This contains all the colors for the cards.|
+|   2   |[Emoji.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/blackjack.hpp)| Contains all classes need to play blackjack.|
+
 
 ### Instructions
 
-- This program requires you to have the blackjack.hpp and color.h 
+- This program requires you to have the Emoji.h file.
 
 ### Example Command
 ```
