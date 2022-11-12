@@ -1,20 +1,11 @@
-## P02 - Vector Class
+## P04 - Rock Paper Scissors Lizard Spock 
 ### Jarette Greene
 ### Description: 
 
-     This Program is used to play a simple game of black jack and demonstrate
-     how the different kinds of inheritance as used. BlackJack is a game that 
-     where two players (The Player and the Dealer) play against eachother
-     where the player makes a bet then both party are given 2 random cards 
-     at the beginning of the round then can choose to keep drawing random 
-     cards (starting with the Player) from a deck until the person drawing 
-     card values equals to 21 which means they immediately win, greater than 
-     21 which is an immediate lose or stopping at any number less than 21. 
-     Then the next player (Dealer) has to draw cards until they get a value
-     higher than the value the the Player stopped at or gets 21 themelves. 
-     If the Player wins they win double the money they bet but if they lose
-     they lose double the money they bet. This continues until the player 
-     either chooses to quit or loses all money. 
+     This Program is used to play the game Rock Paper Scissors Lizard Spock from the popular 
+     TV show Big Bang Theory. This uses a randomizer functions, maps to determine the winner 
+     and unicode emojis to display the different weapon/selection that the user or the Compiler
+     can use. 
 
 ### Files
 
