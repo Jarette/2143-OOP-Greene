@@ -20,7 +20,7 @@
 
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
-|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/main.cpp)| Main driver of my list program . |
+|   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/main.cpp)| Main driver. |
 |   2   |[blackjack.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/blackjack.hpp)| Contains all classes need to play blackjack.|
 |   3   |[color.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/color.h)| This contains all the colors for the cards.|
 
