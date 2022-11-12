@@ -14,33 +14,60 @@
 |   #   | File     | Description                      |
 | :---: | -------- | -------------------------------- |
 |   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P04/main.cpp)| Main driver of my list program . |
-|   2   |[Emoji.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P03/blackjack.hpp)| Contains all classes need to play blackjack.|
+|   2   |[emoji.h](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P04/emoji.h)| Contains unicode emojis.|
 
 
 ### Instructions
 
-- This program requires you to have the Emoji.h file.
+- This program requires you to have the emoji.h file.
 
 ### Example Command
 ```
-//Beginning game and showing the player thier hand 
-      BlackJ.LoadingMessage("SETTING TABLE......");
-      BlackJ.Playerturndispaly(P1, House, bet);
-      cout << endl;
-      // cheecking if the player can still add to thier hand or if they still want to play 
-      while(BlackJ.lessthan21(BlackJ.getplayervalue())&& select != -1 && select != 4){
-        //asking  the player if they would like to quit, hit or stand
-        select = BlackJ.PlayerChoiceMenu();
+ // asking the user what type of game they would like to play 
+  choice = Game.gametype();
+
+
+// the CPU vs CPU game 
+  while (choice == 1) {
+
+    do {
         cout << flush;
         system("clear");
-        // if the player wants to hit 
-        if(select == 1){
-          P1.add_to_hand(D1);
-          BlackJ.LoadingMessage("DEALING.....");
-          BlackJ.Playerturndispaly(P1,House,bet);
-          // breaks loop if they already have a value >= 21
-          if(!BlackJ.lessthan21(BlackJ.getplayervalue())){
-            select = 4;
-            system("clear");
+
+      // display both weapons of the CPUs
+      Game.CPU_Game_display(CPU1, CPU2);
+
+      // get the result of the battle 
+      result = Game.getresult(CPU1.getCname(), CPU2.getCname());
+     // check fot the result and display approipriate message 
+      if (result == 1) {
+        cout << endl;
+        cout << endl;
+        cout << "CPU 1 wins!!";
+        cout << endl;
+        cout << flush;
+        sleep(4);
+        system("clear");
+      } else if (result == -1) {
+        cout << endl;
+        cout << endl;
+        cout << "CPU 2 wins!!";
+        cout << endl;
+         cout << flush;
+        sleep(4);
+        system("clear");
+      } else {
+        // if the battle was a tie restarts and tries again 
+        cout << endl;
+        cout << endl;
+        cout << "Its a Tie, Restarting....";
+        cout << endl;
+        CPU1.changehand();
+        CPU2.changehand();
+         cout << flush;
+        sleep(4);
+        system("clear");
+      }
+    } while (result == 0);
           }
 ```
