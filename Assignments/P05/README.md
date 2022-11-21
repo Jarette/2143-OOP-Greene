@@ -19,7 +19,7 @@
 | :---: | -------- | -------------------------------- |
 |   1   |[main.cpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/main.cpp)| Main driver. |
 |   2   |[weapon.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/weapon.hpp)| contains a to create the weapons.|
-|   3   |[helper.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/helper.hpp)| containing functions to help create special dices.|
+|   3   |[helper.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/helpers.hpp)| containing functions to help create special dices.|
 |   4   |[fighter.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/fighter.hpp)| contains the classes for all the fighters.|
 |   5   |[dice.hpp](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/dice.hpp)| contains classes to create various die .|
 |   6   |[input.dat](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/input.dat)| input file.|
