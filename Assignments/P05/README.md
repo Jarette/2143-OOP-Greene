@@ -25,55 +25,49 @@
 |   6   |[input.dat](https://github.com/Jarette/2143-OOP-Greene/blob/main/Assignments/P05/input.dat)| input file.|
 ### Instructions
 
-- This program requires you to have the emoji.h file.
+- This program requires you to have the weapon.hpp,helpers.hpp,fighter.hpp,dice.hpp and input.dat.
 
 ### Example Command
 ```
- // asking the user what type of game they would like to play 
-  choice = Game.gametype();
+ // asking the users for the name of the input file
+  cout << "What is the name of the file containing the attackers: ";
+  cin >> file_name;
+  infile.open(file_name);
+  cout << flush;
+  system("clear");
+  
+  // creating both groups 
+  Attackers attack(infile);
+  Defender defend(attack.Size());
+  A_Team_count = attack.Size();
+  D_team_count = defend.Size();
+  
+  // the fight starting
+    while (current_attacker->isAlive() && current_defender->isAlive()) {
 
-
-// the CPU vs CPU game 
-  while (choice == 1) {
-
-    do {
-        cout << flush;
-        system("clear");
-
-      // display both weapons of the CPUs
-      Game.CPU_Game_display(CPU1, CPU2);
-
-      // get the result of the battle 
-      result = Game.getresult(CPU1.getCname(), CPU2.getCname());
-     // check fot the result and display approipriate message 
-      if (result == 1) {
-        cout << endl;
-        cout << endl;
-        cout << "CPU 1 wins!!";
-        cout << endl;
-        cout << flush;
-        sleep(4);
-        system("clear");
-      } else if (result == -1) {
-        cout << endl;
-        cout << endl;
-        cout << "CPU 2 wins!!";
-        cout << endl;
-         cout << flush;
-        sleep(4);
-        system("clear");
+// determining who goes first based on speed 
+      if (current_defender->getspeed() >= current_attacker->getspeed()) {
+        // defender going first
+        current_attacker->setHP(current_attacker->getHP() -
+                                current_defender->attack());
+        if (current_attacker->isAlive() == true) {
+          //if attacker doesnt die then the attacker get to attack 
+          current_defender->setHP(current_defender->getHP() -
+                                  current_attacker->attack());
+        }
       } else {
-        // if the battle was a tie restarts and tries again 
-        cout << endl;
-        cout << endl;
-        cout << "Its a Tie, Restarting....";
-        cout << endl;
-        CPU1.changehand();
-        CPU2.changehand();
-         cout << flush;
-        sleep(4);
-        system("clear");
+        //attacker attacks first
+        current_defender->setHP(current_defender->getHP() -
+                                current_attacker->attack());
+        if (current_defender->isAlive() == true) {
+          //if the defender dies then the defender attacks 
+          current_attacker->setHP(current_attacker->getHP() -
+                                  current_defender->attack());
+        }
       }
-    } while (result == 0);
-          }
+      // the fighter regenerate health
+      attack.regen();
+      defend.regen();
+      round_count++;
+    }
 ```
