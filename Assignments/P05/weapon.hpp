@@ -76,40 +76,128 @@ class Weapon {
     Dice*  die;
 
 public:
-    /**
-     * @brief Construct a new Base Weapon object
-     *  Also invokes the Dice class constructor with the "die" type
-     */
+/**
+ * Public : Weapon
+ *
+ * Description:
+ *        
+ *     Construct a new Base Weapon object
+ *     Also invokes the Dice class constructor with the "die" type
+ * 
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      N/A 
+ */
     Weapon() {
         name = "Fists&Feet";
         damage = "1.d.4";
         die = new Dice(damage);
     }
-    /**
-     * @brief Overloaded Constructor for a new Base Weapon object
-     *  Also invokes the Dice class constructor with the "die" type
-     * @param choices-vector of string "die" choices like {"2.d.8","2.d.10","3.d.4"}
-     */
+/**
+ * Public : Weapon
+ *
+ * Description:
+ *        
+ *     Overloaded Constructor for a new Base Weapon object
+ *     Also invokes the Dice class constructor with the "die" type
+ * 
+ * Params:
+ *      vector<string>          choices
+ *
+ * Returns:
+ *      N/A 
+ */
     Weapon(vector< string > choices) {
         name = "Fists&Feet";
         damage = randomChoice(choices);
         die = new Dice(damage);
     }
+/**
+ * Public : Weapon
+ *
+ * Description:
+ *        
+ *     Overloaded Constructor for a new Base Weapon object
+ *     Also invokes the Dice class constructor with the "die" type
+ * 
+ * Params:
+ *      string            n
+ *      string            d
+ *
+ * Returns:
+ *      N/A 
+ */
     Weapon(string n, string d){
       name = n;
       damage = d;
       die = new Dice(damage);
     }
+/**
+ * Public : use
+ *
+ * Description:
+ *        
+ *     This method invokes the roll method of the weapon's
+ *     die to give the damage that the weapon just dealt
+ * 
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      double      :the results of the roll 
+ */
     double use() {
         return die->roll();
     }
+/**
+ * Public : getName
+ *
+ * Description:
+ *        
+ *     This method returns the name of the weapon
+ * 
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string        : the name of the weapon
+ */
     string getName(){
       return name;
     }
+/**
+ * Public : getDamage
+ *
+ * Description:
+ *        
+ *     This method returns the dice that corresponds to the weapon
+ * 
+ * Params:
+ *      N/A
+ *
+ * Returns:
+ *      string        : the kind of dice rolled for this weapo
+ */
     string getDamage(){
       return damage;
     }
-
+/**
+ * Public : operator<<
+ *
+ * Description:
+ *        
+ *     overloaded the ostream operator to allow it to display the
+ *     [name and damage] of the weapon using the << operators 
+ * 
+ * Params:
+ *      ostream         &os
+ *      Weapon&          w
+ *
+ * Returns:
+ *      ostream&         what will be passed to ostream
+ */
     friend ostream& operator<<(ostream& os, const Weapon& w) {
         return os << "[" << w.name << " , " << w.damage << "]";
     }
