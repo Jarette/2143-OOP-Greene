@@ -19,7 +19,7 @@
 *        N/A
 *
 *  Files:
-*           helper.hpp          :contains class to tokenize a string
+*           helper.hpp          :contains functions to tokenize a string
 *
 *****************************************************************************/
 // neccesary Libraries

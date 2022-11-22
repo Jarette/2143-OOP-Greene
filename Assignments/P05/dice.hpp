@@ -18,7 +18,7 @@
 *
 *  Files:
 *			dice.hpp            :contains all the dice classes 
-*           helper.hpp          :contains class to tokenize a string
+*           helper.hpp          :contains functions to tokenize a string
 *
 *****************************************************************************/
 //neccesary Libraries
